@@ -15,7 +15,7 @@
 
     NSString *markdown = @"normal text with **bold** and (31231) [link](http://www.xing.com) *w*ith some more ÜÄäñß text and more and more and more and more\n";
 
-    NSUInteger times = 1000;
+    NSUInteger times = 2000;
     NSMutableString *accum = [[NSMutableString alloc] initWithCapacity:times * markdown.length];
     for (NSUInteger i = 0; i < times; ++i) {
         [accum appendString:markdown];
