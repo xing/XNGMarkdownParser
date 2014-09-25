@@ -18,6 +18,18 @@
     FBSnapshotVerifyView(textView, @"Snapshot");
 }
 
+- (void)testLinks {
+    self.recordMode = kRecordModeAll;
+    UITextView * textView = [self defaultTextView];
+    textView.attributedText = [self parseWithDefaultAttributes:@"bla [normal link](http://www.xing.com) with "
+                               "[link with \\[embedded brackets\\]](http://www.xing.com), followed by "
+                               "[link with \\[embedded brackets\\] and sth](http://www.xing.com) and more stuff "
+                               "and then [a normal link](http://www.xing.com) again "
+                               "plus [more brackets\\[ (opening)](http://www.xing.com) ."];
+
+    FBSnapshotVerifyView(textView, @"Snapshot");
+}
+
 - (void)testBasicFormat {
     self.recordMode = kRecordModeAll;
     UITextView * textView = [self defaultTextView];

@@ -382,6 +382,13 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
                 XNGMarkdownLink *link = [[XNGMarkdownLink alloc] init];
 
                 link.url = [textAsString substringWithRange:linkURLRange];
+
+                NSUInteger lengthBeforeEscapingBrackets = textAsString.length;
+                textAsString = [textAsString stringByReplacingOccurrencesOfString:@"\\[" withString:@"["];
+                textAsString = [textAsString stringByReplacingOccurrencesOfString:@"\\]" withString:@"]"];
+                NSUInteger lengthDif = lengthBeforeEscapingBrackets - textAsString.length;
+                linkTitleRange.length -= lengthDif;
+
                 link.range = NSMakeRange(_accum.length, linkTitleRange.length);
 
                 [_links addObject:link];

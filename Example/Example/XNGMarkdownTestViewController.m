@@ -13,7 +13,7 @@
     [super viewDidLoad];
     [self setupTextView];
 
-    NSString *markdown = @"normal text with **bold** and (31231) [link](http://www.xing.com) *w*ith some more ÜÄäñß text and more and more and more and more\n";
+    NSString *markdown = @"normal text with **bold** and (31231) [link\\[escape me\\] blabla](http://www.xing.com) *w*ith some more ÜÄäñß text and more and more and more and more\n";
 
     NSUInteger times = 2000;
     NSMutableString *accum = [[NSMutableString alloc] initWithCapacity:times * markdown.length];
