@@ -1,5 +1,6 @@
 //
 // Copyright 2011-2014 NimbusKit
+// Copyright 2014 XING AG
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,21 +25,18 @@
 #define UINSFont NSFont
 #endif
 
-typedef enum {
-    NSAttributedStringMarkdownParserHeader1,
-    NSAttributedStringMarkdownParserHeader2,
-    NSAttributedStringMarkdownParserHeader3,
-    NSAttributedStringMarkdownParserHeader4,
-    NSAttributedStringMarkdownParserHeader5,
-    NSAttributedStringMarkdownParserHeader6,
-} NSAttributedStringMarkdownParserHeader;
+typedef NS_ENUM (NSUInteger, XNGMarkdownParserHeader) {
+    XNGMarkdownParserHeader1,
+    XNGMarkdownParserHeader2,
+    XNGMarkdownParserHeader3,
+    XNGMarkdownParserHeader4,
+    XNGMarkdownParserHeader5,
+    XNGMarkdownParserHeader6,
+};
 
-@protocol NSAttributedStringMarkdownStylesheet;
-
-@interface NSAttributedStringMarkdownLink : NSObject
+@interface XNGMarkdownLink : NSObject
 @property (nonatomic, readonly, strong) NSString *url;
 @property (nonatomic, readonly, assign) NSRange range;
-@property (nonatomic, readonly, copy) NSString *tooltip;
 @end
 
 /**
@@ -47,7 +45,7 @@ typedef enum {
  *
  * @ingroup NimbusMarkdown
  */
-@interface NSAttributedStringMarkdownParser : NSObject <NSCopying>
+@interface XNGMarkdownParser : NSObject <NSCopying>
 
 - (NSAttributedString *)attributedStringFromMarkdownString:(NSString *)string;
 - (NSArray *)links; // Array of NSAttributedStringMarkdownLink
@@ -62,7 +60,7 @@ typedef enum {
 // common attributes that affect the whole string, can be overriden by the upper attributes
 @property (nonatomic, retain) NSDictionary *topAttributes;  // default: nil (do nothing)
 
-- (void)setFont:(UINSFont *)font forHeader:(NSAttributedStringMarkdownParserHeader)header;
-- (UINSFont *)fontForHeader:(NSAttributedStringMarkdownParserHeader)header;
+- (void)setFont:(UINSFont *)font forHeader:(XNGMarkdownParserHeader)header;
+- (UINSFont *)fontForHeader:(XNGMarkdownParserHeader)header;
 
 @end

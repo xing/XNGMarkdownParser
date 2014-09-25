@@ -14,7 +14,7 @@
 // limitations under the License.
 //
 
-#import "NSAttributedStringMarkdownParser.h"
+#import "XNGMarkdownParser.h"
 
 #import "MarkdownTokens.h"
 #import "fmemopen.h"
@@ -36,16 +36,15 @@ static inline NSRegularExpression *hrefRegex(void) {
 
 int markdownConsume(char *text, int token, yyscan_t scanner);
 
-@interface NSAttributedStringMarkdownLink ()
+@interface XNGMarkdownLink ()
 @property (nonatomic, strong) NSString *url;
 @property (nonatomic, assign) NSRange range;
-@property (nonatomic, copy) NSString *tooltip;
 @end
 
-@implementation NSAttributedStringMarkdownLink
+@implementation XNGMarkdownLink
 @end
 
-@implementation NSAttributedStringMarkdownParser {
+@implementation XNGMarkdownParser {
     NSMutableDictionary *_headerFonts;
 
     NSMutableArray *_bulletStarts;
@@ -73,7 +72,7 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
         self.linkFontName = self.paragraphFont.fontName;
         self.topAttributes = nil;
 
-        NSAttributedStringMarkdownParserHeader header = NSAttributedStringMarkdownParserHeader1;
+        XNGMarkdownParserHeader header = XNGMarkdownParserHeader1;
         for (CGFloat headerFontSize = 24; headerFontSize >= 14; headerFontSize -= 2, header++) {
             [self setFont:[UINSFont systemFontOfSize:headerFontSize] forHeader:header];
         }
@@ -82,7 +81,7 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-    NSAttributedStringMarkdownParser *parser = [[self.class allocWithZone:zone] init];
+    XNGMarkdownParser *parser = [[self.class allocWithZone:zone] init];
     parser.paragraphFont = self.paragraphFont;
     parser.boldFontName = self.boldFontName;
     parser.italicFontName = self.italicFontName;
@@ -91,21 +90,21 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
     parser.linkFontName = self.linkFontName;
     parser.topAttributes = self.topAttributes;
 
-    for (NSAttributedStringMarkdownParserHeader header = NSAttributedStringMarkdownParserHeader1; header <= NSAttributedStringMarkdownParserHeader6; ++header) {
+    for (XNGMarkdownParserHeader header = XNGMarkdownParserHeader1; header <= XNGMarkdownParserHeader6; ++header) {
         [parser setFont:[self fontForHeader:header] forHeader:header];
     }
     return parser;
 }
 
-- (id)keyForHeader:(NSAttributedStringMarkdownParserHeader)header {
+- (id)keyForHeader:(XNGMarkdownParserHeader)header {
     return @(header);
 }
 
-- (void)setFont:(UINSFont *)font forHeader:(NSAttributedStringMarkdownParserHeader)header {
+- (void)setFont:(UINSFont *)font forHeader:(XNGMarkdownParserHeader)header {
     _headerFonts[[self keyForHeader:header]] = font;
 }
 
-- (UINSFont *)fontForHeader:(NSAttributedStringMarkdownParserHeader)header {
+- (UINSFont *)fontForHeader:(XNGMarkdownParserHeader)header {
     return _headerFonts[[self keyForHeader:header]];
 }
 
@@ -165,7 +164,7 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
 #if TARGET_OS_MAC || __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
     UINSFont *linkFont = [UINSFont fontWithName:self.linkFontName
                                            size:self.paragraphFont.pointSize];
-    for (NSAttributedStringMarkdownLink *link in _links) {
+    for (XNGMarkdownLink *link in _links) {
         NSURL *url = [NSURL URLWithString:link.url];
         if (url != nil) {
             [_accum addAttributes:@{NSLinkAttributeName: url,
@@ -265,12 +264,12 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
 }
 
 - (void)recurseOnString:(NSString *)string withFont:(UINSFont *)font {
-    NSAttributedStringMarkdownParser *recursiveParser = [self copy];
+    XNGMarkdownParser *recursiveParser = [self copy];
     recursiveParser->_topFont = font;
     [_accum appendAttributedString:[recursiveParser attributedStringFromMarkdownString:string]];
 
     // Adjust the recursive parser's links so that they are offset correctly.
-    for (NSAttributedStringMarkdownLink *currentLink in recursiveParser.links) {
+    for (XNGMarkdownLink *currentLink in recursiveParser.links) {
         NSRange range = [currentLink range];
         range.location += _accum.length;
         currentLink.range = range;
@@ -331,7 +330,7 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
             if (rangeOfNonHash.length > 0) {
                 textAsString = [[textAsString substringFromIndex:rangeOfNonHash.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 
-                NSAttributedStringMarkdownParserHeader header = (NSAttributedStringMarkdownParserHeader)(rangeOfNonHash.location - 1);
+                XNGMarkdownParserHeader header = (XNGMarkdownParserHeader)(rangeOfNonHash.location - 1);
                 [self recurseOnString:textAsString withFont:[self fontForHeader:header]];
 
                 // We already appended the recursive parser's results in recurseOnString.
@@ -344,9 +343,9 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
             textAsString = [components objectAtIndex:0];
             UINSFont *font = nil;
             if ([[components objectAtIndex:1] rangeOfString:@"="].length > 0) {
-                font = [self fontForHeader:NSAttributedStringMarkdownParserHeader1];
+                font = [self fontForHeader:XNGMarkdownParserHeader1];
             } else if ([[components objectAtIndex:1] rangeOfString:@"-"].length > 0) {
-                font = [self fontForHeader:NSAttributedStringMarkdownParserHeader2];
+                font = [self fontForHeader:XNGMarkdownParserHeader2];
             }
 
             [self recurseOnString:textAsString withFont:font];
@@ -392,7 +391,7 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
             break;
         }
         case MARKDOWNURL: {
-            NSAttributedStringMarkdownLink *link = [[NSAttributedStringMarkdownLink alloc] init];
+            XNGMarkdownLink *link = [[XNGMarkdownLink alloc] init];
             link.url = textAsString;
             link.range = NSMakeRange(_accum.length, textAsString.length);
             [_links addObject:link];
@@ -403,18 +402,12 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
 
             NSRange linkTitleRange = [result rangeAtIndex:1];
             NSRange linkURLRange = [result rangeAtIndex:2];
-            NSRange tooltipRange = [result rangeAtIndex:5];
 
             if (linkTitleRange.location != NSNotFound && linkURLRange.location != NSNotFound) {
-                NSAttributedStringMarkdownLink *link = [[NSAttributedStringMarkdownLink alloc] init];
+                XNGMarkdownLink *link = [[XNGMarkdownLink alloc] init];
 
-                NSString * title = [textAsString substringWithRange:linkTitleRange];
                 link.url = [textAsString substringWithRange:linkURLRange];
                 link.range = NSMakeRange(_accum.length, linkTitleRange.length);
-
-                if (tooltipRange.location != NSNotFound) {
-                    link.tooltip = [textAsString substringWithRange:tooltipRange];
-                }
 
                 [_links addObject:link];
                 textAsString = [textAsString substringWithRange:linkTitleRange];
@@ -436,7 +429,7 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
 @end
 
 int markdownConsume(char *text, int token, yyscan_t scanner) {
-    NSAttributedStringMarkdownParser *string = (__bridge NSAttributedStringMarkdownParser *)(markdownget_extra(scanner));
+    XNGMarkdownParser *string = (__bridge XNGMarkdownParser *)(markdownget_extra(scanner));
     [string consumeToken:token text:text];
     return 0;
 }

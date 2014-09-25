@@ -1,5 +1,5 @@
 #import "XNGMarkdownTestViewController.h"
-#import <XNGMarkdownParser/NSAttributedStringMarkdownParser.h>
+#import <XNGMarkdownParser/XNGMarkdownParser.h>
 
 @interface XNGMarkdownTestViewController ()
 
@@ -24,7 +24,7 @@
     NSLog(@"BEGIN, parsing string...");
     NSDate *begin = [NSDate date];
 
-    NSAttributedStringMarkdownParser *parser = [[NSAttributedStringMarkdownParser alloc] init];
+    XNGMarkdownParser *parser = [[XNGMarkdownParser alloc] init];
 
     NSMutableParagraphStyle *para = [[NSMutableParagraphStyle alloc] init];
     para.minimumLineHeight = 50;
