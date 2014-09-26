@@ -402,7 +402,7 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
         }
     }
 
-    if(textAsString != nil) {
+    if (textAsString != nil) {
         NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:textAsString
                                                                                attributes:attributes];
         [_accum appendAttributedString:attributedString];
