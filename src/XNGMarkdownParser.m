@@ -1,5 +1,6 @@
 //
 // Copyright 2011-2014 NimbusKit
+// Copyright 2014 XING AG
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,7 +17,7 @@
 
 #import "XNGMarkdownParser.h"
 
-#import "MarkdownTokens.h"
+#import "XNGMarkdownTokens.h"
 #import "fmemopen.h"
 
 #import <CoreText/CoreText.h>

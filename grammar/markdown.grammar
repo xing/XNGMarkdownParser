@@ -14,6 +14,9 @@ u4b            [\xF1-\xF3][\x80-\xBF]{3}
 u4c            \xF4[\x80-\x8F][\x80-\xBF]{2}
 utf_8          {u2a}|{u2b}|{u3a}|{u3b}|{u4a}|{u4b}|{u4c}
 
+/*
+ * Greatly improves parser speed by passing whole phrases instead of chars
+*/
 phrase         ({utf_8}|[a-zA-Z0-9]|[ ])*
 
 h              [0-9a-f]

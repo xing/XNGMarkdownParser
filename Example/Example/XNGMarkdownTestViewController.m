@@ -13,15 +13,15 @@
     [super viewDidLoad];
     [self setupTextView];
 
-    NSString *markdown = @"normal text with **bold** and (31231) [link\\[escape me\\] blabla](http://www.xing.com) *w*ith some more ÜÄäñß text and more and more and more and more\n";
+    NSString *markdown = @"normal [fistro \\[<escape brackets >\\]](http://www.xing.com) text with **bold** and (31231) [link\\[escape me\\] blabla](http://www.xing.com) with some more ÜÄäñß and [link](http://www.xing.com) wow";
 
-    NSUInteger times = 2000;
+    NSUInteger times = 500;
     NSMutableString *accum = [[NSMutableString alloc] initWithCapacity:times * markdown.length];
     for (NSUInteger i = 0; i < times; ++i) {
         [accum appendString:markdown];
     }
 
-    NSLog(@"BEGIN, parsing string...");
+    NSLog(@"BEGIN, parsing string (length %d)...", accum.length);
     NSDate *begin = [NSDate date];
 
     XNGMarkdownParser *parser = [[XNGMarkdownParser alloc] init];
