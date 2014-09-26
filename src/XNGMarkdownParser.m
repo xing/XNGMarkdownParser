@@ -35,7 +35,7 @@ static inline NSRegularExpression *hrefRegex(void) {
     return _hrefRegex;
 }
 
-int markdownConsume(char *text, int token, yyscan_t scanner);
+int xng_markdown_consume(char *text, int token, yyscan_t scanner);
 
 @interface XNGMarkdownLink ()
 @property (nonatomic, strong) NSString *url;
@@ -115,11 +115,11 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
 
     yyscan_t scanner;
 
-    markdownlex_init(&scanner);
-    markdownset_extra((__bridge void *)(self), scanner);
-    markdownset_in(markdownin, scanner);
-    markdownlex(scanner);
-    markdownlex_destroy(scanner);
+    xng_markdownlex_init(&scanner);
+    xng_markdownset_extra((__bridge void *)(self), scanner);
+    xng_markdownset_in(markdownin, scanner);
+    xng_markdownlex(scanner);
+    xng_markdownlex_destroy(scanner);
 
     fclose(markdownin);
 
@@ -276,32 +276,32 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
     [attributes addEntriesFromDictionary:[self attributesForFont:self.topFont]];
 
     switch (token) {
-        case MARKDOWNEM: { // * *
+        case MARKDOWN_EM: { // * *
             textAsString = [textAsString substringWithRange:NSMakeRange(1, textAsString.length - 2)];
             [attributes addEntriesFromDictionary:[self attributesForFontWithName:self.italicFontName]];
             break;
         }
-        case MARKDOWNSTRONG: { // ** **
+        case MARKDOWN_STRONG: { // ** **
             textAsString = [textAsString substringWithRange:NSMakeRange(2, textAsString.length - 4)];
             [attributes addEntriesFromDictionary:[self attributesForFontWithName:self.boldFontName]];
             break;
         }
-        case MARKDOWNSTRONGEM: { // *** ***
+        case MARKDOWN_STRONGEM: { // *** ***
             textAsString = [textAsString substringWithRange:NSMakeRange(3, textAsString.length - 6)];
             [attributes addEntriesFromDictionary:[self attributesForFontWithName:self.boldItalicFontName]];
             break;
         }
-        case MARKDOWNSTRIKETHROUGH: { // ~~ ~~
+        case MARKDOWN_STRIKETHROUGH: { // ~~ ~~
             textAsString = [textAsString substringWithRange:NSMakeRange(2, textAsString.length - 4)];
             [attributes addEntriesFromDictionary:@{NSStrikethroughStyleAttributeName: @(NSUnderlineStyleSingle)}];
             break;
         }
-        case MARKDOWNCODESPAN: { // ` `
+        case MARKDOWN_CODESPAN: { // ` `
             textAsString = [textAsString substringWithRange:NSMakeRange(1, textAsString.length - 2)];
             [attributes addEntriesFromDictionary:[self attributesForFontWithName:self.codeFontName]];
             break;
         }
-        case MARKDOWNHEADER: { // ####
+        case MARKDOWN_HEADER: { // ####
             NSRange rangeOfNonHash = [textAsString rangeOfCharacterFromSet:[[NSCharacterSet characterSetWithCharactersInString:@"#"] invertedSet]];
             if (rangeOfNonHash.length > 0) {
                 textAsString = [[textAsString substringFromIndex:rangeOfNonHash.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -314,7 +314,7 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
             }
             break;
         }
-        case MARKDOWNMULTILINEHEADER: {
+        case MARKDOWN_MULTILINEHEADER: {
             NSArray *components = [textAsString componentsSeparatedByString:@"\n"];
             textAsString = [components objectAtIndex:0];
             UINSFont *font = nil;
@@ -330,7 +330,7 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
             textAsString = nil;
             break;
         }
-        case MARKDOWNPARAGRAPH: {
+        case MARKDOWN_PARAGRAPH: {
             textAsString = @"\n\n";
 
             if (_bulletStarts.count > 0) {
@@ -345,7 +345,7 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
             }
             break;
         }
-        case MARKDOWNBULLETSTART: {
+        case MARKDOWN_BULLETSTART: {
             NSInteger numberOfDashes = [textAsString rangeOfString:@" "].location;
             if (_bulletStarts.count > 0 && _bulletStarts.count <= numberOfDashes) {
                 // Treat nested bullet points as flat ones...
@@ -362,18 +362,18 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
             textAsString = @"•\t";
             break;
         }
-        case MARKDOWNNEWLINE: {
+        case MARKDOWN_NEWLINE: {
             textAsString = @"";
             break;
         }
-        case MARKDOWNURL: {
+        case MARKDOWN_URL: {
             XNGMarkdownLink *link = [[XNGMarkdownLink alloc] init];
             link.url = textAsString;
             link.range = NSMakeRange(_accum.length, textAsString.length);
             [_links addObject:link];
             break;
         }
-        case MARKDOWNHREF: { // [Title] (url "tooltip")
+        case MARKDOWN_HREF: { // [Title] (url "tooltip")
             NSTextCheckingResult *result = [hrefRegex() firstMatchInString:textAsString options:0 range:NSMakeRange(0, textAsString.length)];
 
             NSRange linkTitleRange = [result rangeAtIndex:1];
@@ -411,8 +411,8 @@ int markdownConsume(char *text, int token, yyscan_t scanner);
 
 @end
 
-int markdownConsume(char *text, int token, yyscan_t scanner) {
-    XNGMarkdownParser *string = (__bridge XNGMarkdownParser *)(markdownget_extra(scanner));
+int xng_markdown_consume(char *text, int token, yyscan_t scanner) {
+    XNGMarkdownParser *string = (__bridge XNGMarkdownParser *)(xng_markdownget_extra(scanner));
     [string consumeToken:token text:text];
     return 0;
 }

@@ -21,7 +21,7 @@
         [accum appendString:markdown];
     }
 
-    NSLog(@"BEGIN, parsing string (length %d)...", accum.length);
+    NSLog(@"BEGIN, parsing string (length %zd)...", accum.length);
     NSDate *begin = [NSDate date];
 
     XNGMarkdownParser *parser = [[XNGMarkdownParser alloc] init];

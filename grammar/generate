@@ -18,13 +18,13 @@
 # limitations under the License.
 #
 
-flex --prefix=markdown --nounput markdown.grammar
+flex --prefix=xng_markdown --nounput markdown.grammar
 
-cat MarkdownTokenizerPrefix > MarkdownTokenizer.cpp
-cat lex.markdown.c >> MarkdownTokenizer.cpp
+cat MarkdownTokenizerPrefix > XNGMarkdownTokenizer.cpp
+cat lex.xng_markdown.c >> XNGMarkdownTokenizer.cpp
 
-rm lex.markdown.c
+rm lex.xng_markdown.c
 
-mv MarkdownTokenizer.cpp ../src/XNGMarkdownTokenizer.m
-cp MarkdownTokens.cpp ../src/XNGMarkdownTokens.m
-cp MarkdownTokens.h ../src/XNGMarkdownTokens.h
+mv XNGMarkdownTokenizer.cpp ../src/XNGMarkdownTokenizer.m
+cp XNGMarkdownTokens.cpp ../src/XNGMarkdownTokens.m
+cp XNGMarkdownTokens.h ../src/XNGMarkdownTokens.h

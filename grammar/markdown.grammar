@@ -55,23 +55,23 @@ nl             \n|\r\n|\r|\f
 
 %%
 
-{em}                            {markdownConsume(yytext, MARKDOWNEM, yyscanner);}
-{strong}                        {markdownConsume(yytext, MARKDOWNSTRONG, yyscanner);}
-{strongem}                      {markdownConsume(yytext, MARKDOWNSTRONGEM, yyscanner);}
-{strikethrough}                 {markdownConsume(yytext, MARKDOWNSTRIKETHROUGH, yyscanner);}
-{codespan}                      {markdownConsume(yytext, MARKDOWNCODESPAN, yyscanner);}
-{header1}                       {markdownConsume(yytext, MARKDOWNHEADER, yyscanner);}
-{header2}                       {markdownConsume(yytext, MARKDOWNMULTILINEHEADER, yyscanner);}
-{url}                           {markdownConsume(yytext, MARKDOWNURL, yyscanner);}
-{href}                          {markdownConsume(yytext, MARKDOWNHREF, yyscanner);}
-{bulletstart}                   {markdownConsume(yytext, MARKDOWNBULLETSTART, yyscanner);}
+{em}                            {xng_markdown_consume(yytext, MARKDOWN_EM, yyscanner);}
+{strong}                        {xng_markdown_consume(yytext, MARKDOWN_STRONG, yyscanner);}
+{strongem}                      {xng_markdown_consume(yytext, MARKDOWN_STRONGEM, yyscanner);}
+{strikethrough}                 {xng_markdown_consume(yytext, MARKDOWN_STRIKETHROUGH, yyscanner);}
+{codespan}                      {xng_markdown_consume(yytext, MARKDOWN_CODESPAN, yyscanner);}
+{header1}                       {xng_markdown_consume(yytext, MARKDOWN_HEADER, yyscanner);}
+{header2}                       {xng_markdown_consume(yytext, MARKDOWN_MULTILINEHEADER, yyscanner);}
+{url}                           {xng_markdown_consume(yytext, MARKDOWN_URL, yyscanner);}
+{href}                          {xng_markdown_consume(yytext, MARKDOWN_HREF, yyscanner);}
+{bulletstart}                   {xng_markdown_consume(yytext, MARKDOWN_BULLETSTART, yyscanner);}
 
-[ ]{2,}$                        {markdownConsume(yytext, MARKDOWNNEWLINE, yyscanner);}
-[\n]{2,}                        {markdownConsume(yytext, MARKDOWNPARAGRAPH, yyscanner);}
-[ \n\t\f]                       {markdownConsume(yytext, MARKDOWNUNKNOWN, yyscanner);}
-{phrase}                        {markdownConsume(yytext, MARKDOWNUNKNOWN, yyscanner);}
-.                               {markdownConsume(yytext, MARKDOWNUNKNOWN, yyscanner);}
+[ ]{2,}$                        {xng_markdown_consume(yytext, MARKDOWN_NEWLINE, yyscanner);}
+[\n]{2,}                        {xng_markdown_consume(yytext, MARKDOWN_PARAGRAPH, yyscanner);}
+[ \n\t\f]                       {xng_markdown_consume(yytext, MARKDOWN_UNKNOWN, yyscanner);}
+{phrase}                        {xng_markdown_consume(yytext, MARKDOWN_UNKNOWN, yyscanner);}
+.                               {xng_markdown_consume(yytext, MARKDOWN_UNKNOWN, yyscanner);}
 
 %%
 
-int markdownwrap(yyscan_t yyscanner){return 1;}
+int xng_markdownwrap(yyscan_t yyscanner){return 1;}
