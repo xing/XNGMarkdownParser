@@ -1954,7 +1954,7 @@ static int yy_get_next_buffer(yyscan_t yyscanner) {
             YY_CURRENT_BUFFER_LVALUE->yy_buf_size - number_to_move - 1;
 
         while ( num_to_read <= 0 ) { /* Not enough room in the buffer - grow it. */
-                                    /* just a shorter name for the current buffer */
+                                     /* just a shorter name for the current buffer */
             YY_BUFFER_STATE b = YY_CURRENT_BUFFER;
 
             int yy_c_buf_p_offset =

@@ -23,18 +23,6 @@
 #import <CoreText/CoreText.h>
 #import <pthread.h>
 
-static NSRegularExpression *_hrefRegex = nil;
-static inline NSRegularExpression *hrefRegex(void) {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _hrefRegex = [NSRegularExpression regularExpressionWithPattern:@"\\[(.*?)\\]\\((\\S+)(\\s+(\"|\')(.*?)(\"|\'))?\\)"
-                                                               options:NSRegularExpressionCaseInsensitive
-                                                                 error:nil];
-    });
-
-    return _hrefRegex;
-}
-
 int xng_markdown_consume(char *text, int token, yyscan_t scanner);
 
 @interface XNGMarkdownLink ()
@@ -374,22 +362,23 @@ int xng_markdown_consume(char *text, int token, yyscan_t scanner);
             break;
         }
         case MARKDOWN_HREF: { // [Title] (url "tooltip")
-            NSTextCheckingResult *result = [hrefRegex() firstMatchInString:textAsString options:0 range:NSMakeRange(0, textAsString.length)];
+            textAsString = [textAsString stringByReplacingOccurrencesOfString:@"\\[" withString:@"["];
+            textAsString = [textAsString stringByReplacingOccurrencesOfString:@"\\]" withString:@"]"];
 
-            NSRange linkTitleRange = [result rangeAtIndex:1];
-            NSRange linkURLRange = [result rangeAtIndex:2];
+            NSRange rangeOfFirstOpenBracket = [textAsString rangeOfString:@"[" options:0];
+            NSRange rangeOfLastCloseBracket = [textAsString rangeOfString:@"]" options:NSBackwardsSearch];
+            NSRange rangeOfLastOpenParenthesis = [textAsString rangeOfString:@"(" options:NSBackwardsSearch];
+            NSRange rangeOfLastCloseParenthesis = [textAsString rangeOfString:@")" options:NSBackwardsSearch];
+
+            NSRange linkTitleRange = NSMakeRange(rangeOfFirstOpenBracket.location + 1,
+                                                 rangeOfLastCloseBracket.location - rangeOfFirstOpenBracket.location - 1);
+            NSRange linkURLRange = NSMakeRange(rangeOfLastOpenParenthesis.location + 1,
+                                               rangeOfLastCloseParenthesis.location - rangeOfLastOpenParenthesis.location - 1);
 
             if (linkTitleRange.location != NSNotFound && linkURLRange.location != NSNotFound) {
                 XNGMarkdownLink *link = [[XNGMarkdownLink alloc] init];
 
                 link.url = [textAsString substringWithRange:linkURLRange];
-
-                NSUInteger lengthBeforeEscapingBrackets = textAsString.length;
-                textAsString = [textAsString stringByReplacingOccurrencesOfString:@"\\[" withString:@"["];
-                textAsString = [textAsString stringByReplacingOccurrencesOfString:@"\\]" withString:@"]"];
-                NSUInteger lengthDif = lengthBeforeEscapingBrackets - textAsString.length;
-                linkTitleRange.length -= lengthDif;
-
                 link.range = NSMakeRange(_accum.length, linkTitleRange.length);
 
                 [_links addObject:link];
