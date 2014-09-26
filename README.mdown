@@ -4,19 +4,15 @@ A Markdown NSAttributedString Parser
 This is a Markdown => NSAttributedString parser built on top of a flex parser. It takes an NSString
 and returns an NSAttributedString with markdown tags replaced by CoreText formatting attributes.
 
+This project is a fork of NSAttributedMarkdownParser by NimbusKit: https://github.com/NimbusKit/markdown
+
 Adding it to your Project
 -------------------------
 
 1. Drag all of the files from the src/ directory into your project.
-2. Import NSAttributedStringMarkdownParser.h in your project.
+2. Import XNGMarkdownParser.h in your project.
 3. Create an instance of the parser object and pass it the string you wish to parse.
-4. Plug the resulting NSAttributedString into your favorite NSAttributedString label implementation.
-
-NSAttributedString Labels
--------------------------
-
-Nimbus: https://github.com/jverkoey/nimbus
-TTTAttributedLabel: https://github.com/mattt/TTTAttributedLabel
+4. Plug the resulting NSAttributedString into your favorite NSAttributedString label implementation (like an UITextView)
 
 Supported Features
 ------------------
@@ -42,12 +38,20 @@ Supported Features
     http://google.com urls
     [Text] (http://google.com "alt text") urls
 
+Extended Features
+-----------------
+* UTF-8 support
+* Vastly improved speed
+* Extended formatting for paragraphs
+* Support different link fonts
+* Tests and example project
+* Support for CocoaPods (soon!)
+
 Example
 -------
 
-    NSAttributedStringMarkdownParser* parser = [[NSAttributedStringMarkdownParser alloc] init];
-    NSAttributedString* string = [parser attributedStringFromMarkdownString:
-                                  @"This is __rad__."];
+    XNGMarkdownParser* parser = [[XNGMarkdownParser alloc] init];
+    NSAttributedString* string = [parser attributedStringFromMarkdownString:@"This is __rad__."];
 
-See the Catalog application included with the project for more examples.
+See the included Example project and the tests to check for further options.
 
