@@ -48,7 +48,7 @@
     self.textView.attributedText = attr;
 }
 
-- (void)setupTextView {
+
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     CGRect frame = self.view.frame;
