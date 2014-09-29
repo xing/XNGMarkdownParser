@@ -2,7 +2,7 @@ PODS:
   - Expecta (0.3.1)
   - FBSnapshotTestCase (1.2)
   - fmemopen (0.0.1)
-  - XNGMarkdownParser (0.1):
+  - XNGMarkdownParser (0.2):
     - fmemopen
 
 DEPENDENCIES:
@@ -15,9 +15,9 @@ EXTERNAL SOURCES:
     :path: ../XNGMarkdownParser.podspec
 
 SPEC CHECKSUMS:
-  Expecta: e9dfd3ebf3a05e54016dc5b9f20a1c088a3e32fb
-  FBSnapshotTestCase: 29b9bf99422278cf40ea3beb7d8649466f38cf2c
-  fmemopen: ccbcc664b54a0fdbffc3b2727decb0525f9ebda9
-  XNGMarkdownParser: 6967f9f80a8d1fd1fda2698d4ad7cd772b0ef5d7
+  Expecta: 03aabd0a89d8dea843baecb19a7fd7466a69a31d
+  FBSnapshotTestCase: 4159bdf235fdae25aa7d813f1452a4f05ad4f9cd
+  fmemopen: 54fc0cc9d9063de6103b40a24849818a53c8f1e5
+  XNGMarkdownParser: d3ce9a6d07c4c2a367c270c4151a10a95be3264b
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.34.1

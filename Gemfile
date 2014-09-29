@@ -1,9 +1,5 @@
-source 'http://rubygems.org'
-source 'http://gems.xing.com'
+source 'http://www.rubygems.org'
 
-gem 'cocoapods', '~> 0.33.1'
-gem 'naturalsort', '~> 1.1.1'
-gem 'israkel', '~> 0.4.4'
-gem 'plist'
-gem 'xcpretty'
-gem 'httparty'
+gem "cocoapods", '~> 0.34.1'
+gem "slather"
+gem "xcpretty"
