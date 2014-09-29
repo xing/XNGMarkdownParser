@@ -58,7 +58,7 @@ typedef NS_ENUM (NSUInteger, XNGMarkdownParserHeader) {
 @property (nonatomic, copy) NSString *linkFontName; // Default: paragraphFont
 
 // common attributes that affect the whole string, can be overriden by the upper attributes
-@property (nonatomic, retain) NSDictionary *topAttributes;  // default: nil (do nothing)
+@property (nonatomic, strong) NSDictionary *topAttributes;  // default: nil (do nothing)
 
 - (void)setFont:(UINSFont *)font forHeader:(XNGMarkdownParserHeader)header;
 - (UINSFont *)fontForHeader:(XNGMarkdownParserHeader)header;
