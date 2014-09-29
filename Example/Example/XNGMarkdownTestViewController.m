@@ -12,10 +12,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupTextView];
+    [self setupMarkDownAttributedString];
+}
 
+- (void)setupTextView {
+    self.textView = [[UITextView alloc] initWithFrame:CGRectZero];
+    self.textView.editable = NO;
+    self.textView.selectable = YES;
+    [self.view addSubview:self.textView];
+}
+
+- (void)setupMarkDownAttributedString {
     NSString *markdown = @"normal [fistro \\[<escape brackets >\\]](http://www.xing.com) text with **bold** and (31231) [link\\[escape me\\] blabla](http://www.xing.com) with some more ÜÄäñß and [link](http://www.xing.com) wow";
-
-    NSUInteger times = 1000;
+    
+    NSUInteger times = 500;
     NSMutableString *accum = [[NSMutableString alloc] initWithCapacity:times * markdown.length];
     for (NSUInteger i = 0; i < times; ++i) {
         [accum appendString:markdown];
@@ -39,12 +49,6 @@
 }
 
 - (void)setupTextView {
-    self.textView = [[UITextView alloc] initWithFrame:CGRectZero];
-    self.textView.editable = NO;
-    self.textView.selectable = YES;
-    [self.view addSubview:self.textView];
-}
-
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     CGRect frame = self.view.frame;
