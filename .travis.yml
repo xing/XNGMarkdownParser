@@ -1,6 +1,4 @@
 language: objective-c
-before:
-  - bundle
-  - cd Example && bundle exec pod install
+before_install: rake bootstrap
 script: ./scripts/test.sh
 after_success: bundle exec slather
