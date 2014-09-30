@@ -1,4 +1,4 @@
 language: objective-c
 before_install: rake bootstrap
-script: ./scripts/test.sh
+script: rake spec
 after_success: bundle exec slather
