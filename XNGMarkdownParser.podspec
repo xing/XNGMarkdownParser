@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.license      = 'Apache License, Version 2.0'
   s.author       = { "XING AG" => "iosdev@xing.com" }
   s.platform     = :ios
-  s.source       = { :git => "git@github.com:xing/XNGMarkdownParser.git", :tag => s.version.to_s }
+  s.source       = { :git => "https://github.com/xing/XNGMarkdownParser.git", :tag => s.version.to_s }
   s.source_files = 'src/*.{h,m}'
   s.dependency 'fmemopen'
   s.requires_arc = true
