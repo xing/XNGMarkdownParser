@@ -1,6 +1,9 @@
 A Markdown NSAttributedString Parser
 ====================================
 
+[![Build Status](http://img.shields.io/travis/xing/XNGMarkdownParser/master.svg?style=flat)](https://travis-ci.org/xing/XNGMarkdownParser)
+[![Coverage Status](http://img.shields.io/coveralls/xing/XNGMarkdownParser/master.svg?style=flat)](https://coveralls.io/r/xing/XNGMarkdownParser)
+
 This is a Markdown => NSAttributedString parser built on top of a flex parser. It takes an NSString
 and returns an NSAttributedString with markdown tags replaced by CoreText formatting attributes.
 
