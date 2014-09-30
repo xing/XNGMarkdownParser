@@ -22,6 +22,12 @@
 		C0CF278019CB2300005EF111 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0CF276819CB2300005EF111 /* UIKit.framework */; };
 		C0CF278819CB2300005EF111 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C0CF278619CB2300005EF111 /* InfoPlist.strings */; };
 		C0CF278A19CB2300005EF111 /* SnapshotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CF278919CB2300005EF111 /* SnapshotTests.m */; };
+		DA0DBA5D19DAAE860045E317 /* headers.md in Sources */ = {isa = PBXBuildFile; fileRef = DA0DBA5A19DAAE860045E317 /* headers.md */; };
+		DA0DBA5E19DAAE860045E317 /* links.md in Sources */ = {isa = PBXBuildFile; fileRef = DA0DBA5B19DAAE860045E317 /* links.md */; };
+		DA0DBA5F19DAAE860045E317 /* text_styles.md in Sources */ = {isa = PBXBuildFile; fileRef = DA0DBA5C19DAAE860045E317 /* text_styles.md */; };
+		DA0DBA6019DAAEEB0045E317 /* headers.md in Resources */ = {isa = PBXBuildFile; fileRef = DA0DBA5A19DAAE860045E317 /* headers.md */; };
+		DA0DBA6119DAAEEB0045E317 /* links.md in Resources */ = {isa = PBXBuildFile; fileRef = DA0DBA5B19DAAE860045E317 /* links.md */; };
+		DA0DBA6219DAAEEB0045E317 /* text_styles.md in Resources */ = {isa = PBXBuildFile; fileRef = DA0DBA5C19DAAE860045E317 /* text_styles.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +64,9 @@
 		C0CF278519CB2300005EF111 /* ExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ExampleTests-Info.plist"; sourceTree = "<group>"; };
 		C0CF278719CB2300005EF111 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C0CF278919CB2300005EF111 /* SnapshotTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnapshotTests.m; sourceTree = "<group>"; };
+		DA0DBA5A19DAAE860045E317 /* headers.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = headers.md; sourceTree = "<group>"; };
+		DA0DBA5B19DAAE860045E317 /* links.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = links.md; sourceTree = "<group>"; };
+		DA0DBA5C19DAAE860045E317 /* text_styles.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = text_styles.md; sourceTree = "<group>"; };
 		F373E2C1346E4E0B8B708C6D /* libPods-Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -147,6 +156,7 @@
 		C0CF278319CB2300005EF111 /* ExampleTests */ = {
 			isa = PBXGroup;
 			children = (
+				DA0DBA5919DAAE860045E317 /* Fixtures */,
 				C0CF278919CB2300005EF111 /* SnapshotTests.m */,
 				C0CF278419CB2300005EF111 /* Supporting Files */,
 			);
@@ -160,6 +170,16 @@
 				C0CF278619CB2300005EF111 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DA0DBA5919DAAE860045E317 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				DA0DBA5A19DAAE860045E317 /* headers.md */,
+				DA0DBA5B19DAAE860045E317 /* links.md */,
+				DA0DBA5C19DAAE860045E317 /* text_styles.md */,
+			);
+			path = Fixtures;
 			sourceTree = "<group>";
 		};
 		F8BCBE3F87B41B303AB4CE21 /* Pods */ = {
@@ -262,6 +282,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA0DBA6019DAAEEB0045E317 /* headers.md in Resources */,
+				DA0DBA6119DAAEEB0045E317 /* links.md in Resources */,
+				DA0DBA6219DAAEEB0045E317 /* text_styles.md in Resources */,
 				C0CF278819CB2300005EF111 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,6 +370,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0CF278A19CB2300005EF111 /* SnapshotTests.m in Sources */,
+				DA0DBA5F19DAAE860045E317 /* text_styles.md in Sources */,
+				DA0DBA5E19DAAE860045E317 /* links.md in Sources */,
+				DA0DBA5D19DAAE860045E317 /* headers.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

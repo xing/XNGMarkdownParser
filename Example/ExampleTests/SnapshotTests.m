@@ -15,14 +15,24 @@
     FBSnapshotVerifyView(textView, nil);
 }
 
+- (void)testHeaders {
+    UITextView *textView = [self defaultTextView];
+    textView.attributedText = [self parseWithDefaultAttributes:[self markdownFromFile:@"headers"]];
+    
+    FBSnapshotVerifyView(textView, nil);
+}
+
 - (void)testLinks {
     UITextView *textView = [self defaultTextView];
-    textView.attributedText = [self parseWithDefaultAttributes:@"bla [normal link](http://www.xing.com) with "
-                               "[link with \\[embedded brackets\\]](http://www.xing.com), followed by "
-                               "[link with \\[embedded brackets\\] and sth](http://www.xing.com) and more stuff "
-                               "and then [a normal link](http://www.xing.com) again "
-                               "plus [more brackets\\[ (opening)](http://www.xing.com) ."];
+    textView.attributedText = [self parseWithDefaultAttributes:[self markdownFromFile:@"links"]];
+    
+    FBSnapshotVerifyView(textView, nil);
+}
 
+- (void)testTextStyles {
+    UITextView *textView = [self defaultTextView];
+    textView.attributedText = [self parseWithDefaultAttributes:[self markdownFromFile:@"text_styles"]];
+    
     FBSnapshotVerifyView(textView, nil);
 }
 
@@ -84,7 +94,7 @@
 
 - (NSString *)markdownFromFile:(NSString *)name {
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSString *filepath = [bundle pathForResource:name ofType:@"md"];
+    NSString *filepath = [bundle pathForResource:name ofType:@"txt"];
     NSString *markdown = [[NSString alloc] initWithContentsOfFile:filepath encoding:NSUTF8StringEncoding error:nil];
     return markdown;
 }
