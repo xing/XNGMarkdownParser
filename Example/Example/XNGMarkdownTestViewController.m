@@ -23,7 +23,11 @@
 }
 
 - (void)setupMarkDownAttributedString {
-    NSString *markdown = @"hTTp://www.xing.com esto es una frase en medio http://www.xing.com ";
+    NSString *markdown = @"####### invalid header (7)\n"
+    "dasdas dasd adasd adasdas\n"
+    "dadasddas\n"
+    "### valid header 3\n"
+    "more stuff\n";
     
     NSUInteger times = 1;
     NSMutableString *accum = [[NSMutableString alloc] initWithCapacity:times * markdown.length];

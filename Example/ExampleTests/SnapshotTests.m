@@ -8,19 +8,23 @@
 
 @implementation ExampleTests
 
+- (void) setUp {
+    [super setUp];
+
+}
+
 - (void)testPlainText {
     UITextView *textView = [self defaultTextView];
-    textView.attributedText = [self parseWithDefaultAttributes:@"This is just some plaintext to test the markdown parser, with some UTF-8: ÄÖÜäöüßñ©€"];
+    NSAttributedString * attr = [self parseWithDefaultAttributes:@"This is just some plaintext to test the markdown parser, with some UTF-8: ÄÖÜäöüßñ©€"];
+    [self setAttributedTextAndResizeAutomatically:attr
+                                       inTextView:textView];
 
     FBSnapshotVerifyView(textView, nil);
 }
 
-//- (void)testHeaders {
-//    UITextView *textView = [self defaultTextView];
-//    textView.attributedText = [self parseWithDefaultAttributes:[self markdownFromFile:@"headers"]];
-//    
-//    FBSnapshotVerifyView(textView, nil);
-//}
+- (void)testHeaders {
+    [self testMarkdownFileWithDefaultAttributes:@"headers.txt"];
+}
 //
 //- (void)testLinks {
 //    UITextView *textView = [self defaultTextView];
@@ -86,6 +90,21 @@
 
 #pragma mark - Helper
 
+- (void) testMarkdownFileWithDefaultAttributes:(NSString*)fileName {
+    UITextView *textView = [self defaultTextView];
+    NSAttributedString * attrString = [self parseWithDefaultAttributes:[self markdownFromFile:fileName]];
+    [self setAttributedTextAndResizeAutomatically:attrString
+                                       inTextView:textView];
+
+    FBSnapshotVerifyView(textView, nil);
+}
+
+- (void)setAttributedTextAndResizeAutomatically:(NSAttributedString*)attrString
+                                     inTextView:(UITextView*)view
+{
+    view.attributedText = attrString;
+}
+
 - (UITextView *)defaultTextView {
     UITextView *tv = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     tv.editable = NO;
@@ -93,9 +112,10 @@
 }
 
 - (NSString *)markdownFromFile:(NSString *)name {
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSString *filepath = [bundle pathForResource:name ofType:@"txt"];
-    NSString *markdown = [[NSString alloc] initWithContentsOfFile:filepath encoding:NSUTF8StringEncoding error:nil];
+    NSBundle * b = [NSBundle bundleForClass:self.class];
+    NSString *file = [b pathForResource:name ofType:nil];
+
+    NSString *markdown = [[NSString alloc] initWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil];
     return markdown;
 }
 
