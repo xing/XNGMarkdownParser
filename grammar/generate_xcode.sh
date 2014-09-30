@@ -22,7 +22,7 @@ GRAMMAR_DIR="$SRCROOT/../grammar"
 SOURCE_DIR="$SRCROOT/../src"
 LEX_OUTPUT="$GRAMMAR_DIR/lex.xng_markdown.c"
 NEW_TOKENIZER="$GRAMMAR_DIR/XNGMarkdownTokenizer.cpp"
-SRC_TOKENIZER="$SOURCE_DIR/XNGMarkdownTokenizer.cpp"
+SRC_TOKENIZER="$SOURCE_DIR/XNGMarkdownTokenizer.m"
 
 flex --prefix=xng_markdown --nounput --outfile=$LEX_OUTPUT $GRAMMAR_DIR/markdown.grammar
 

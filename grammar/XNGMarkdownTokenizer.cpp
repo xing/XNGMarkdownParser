@@ -1634,7 +1634,7 @@ case 9:
 /* rule 9 can match eol */
 YY_RULE_SETUP
 #line 67 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
-{xng_markdown_consume(yytext, MARKDOWN_HREF, yyscanner);}
+{xng_markdown_consume(yytext, MARKDOWN_UNKNOWN, yyscanner);}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
