@@ -74,14 +74,23 @@
     FBSnapshotVerifyView(textView, nil);
 }
 
+#pragma mark - Helper
+
 - (UITextView *)defaultTextView {
     UITextView *tv = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     tv.editable = NO;
     return tv;
 }
 
+- (NSString *)markdownFromFile:(NSString *)name {
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSString *filepath = [bundle pathForResource:name ofType:@"md"];
+    NSString *markdown = [[NSString alloc] initWithContentsOfFile:filepath encoding:NSUTF8StringEncoding error:nil];
+    return markdown;
+}
+
 - (NSAttributedString *)parseWithDefaultAttributes:(NSString*)markdown {
-    XNGMarkdownParser * parser = [[XNGMarkdownParser alloc] init];
+    XNGMarkdownParser *parser = [[XNGMarkdownParser alloc] init];
     return [parser attributedStringFromMarkdownString:markdown];
 }
 
