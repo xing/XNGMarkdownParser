@@ -13,6 +13,9 @@
 		C09F673E19DADE7E009CE501 /* headers.txt in Resources */ = {isa = PBXBuildFile; fileRef = C09F673C19DADE7E009CE501 /* headers.txt */; };
 		C09F674419DAE77D009CE501 /* links.txt in Resources */ = {isa = PBXBuildFile; fileRef = C09F674219DAE77D009CE501 /* links.txt */; };
 		C09F674519DAE77D009CE501 /* text_styles.txt in Resources */ = {isa = PBXBuildFile; fileRef = C09F674319DAE77D009CE501 /* text_styles.txt */; };
+		C09F674619DAE98E009CE501 /* headers.txt in Resources */ = {isa = PBXBuildFile; fileRef = C09F673C19DADE7E009CE501 /* headers.txt */; };
+		C09F674719DAE98E009CE501 /* links.txt in Resources */ = {isa = PBXBuildFile; fileRef = C09F674219DAE77D009CE501 /* links.txt */; };
+		C09F674819DAE98E009CE501 /* text_styles.txt in Resources */ = {isa = PBXBuildFile; fileRef = C09F674319DAE77D009CE501 /* text_styles.txt */; };
 		C0CF276519CB2300005EF111 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0CF276419CB2300005EF111 /* Foundation.framework */; };
 		C0CF276719CB2300005EF111 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0CF276619CB2300005EF111 /* CoreGraphics.framework */; };
 		C0CF276919CB2300005EF111 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0CF276819CB2300005EF111 /* UIKit.framework */; };
@@ -202,6 +205,7 @@
 				C0CF275E19CB2300005EF111 /* Frameworks */,
 				C0CF275F19CB2300005EF111 /* Resources */,
 				0AEBFF1653AD4F51A789F580 /* Copy Pods Resources */,
+				C09F674919DAEF2C009CE501 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -270,8 +274,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C09F674719DAE98E009CE501 /* links.txt in Resources */,
 				C0CF276F19CB2300005EF111 /* InfoPlist.strings in Resources */,
 				C0CF277719CB2300005EF111 /* Images.xcassets in Resources */,
+				C09F674819DAE98E009CE501 /* text_styles.txt in Resources */,
+				C09F674619DAE98E009CE501 /* headers.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +340,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		C09F674919DAEF2C009CE501 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "/bin/sh $(PROJECT_DIR)/../grammar/generate_xcode.sh";
+			shellScript = "";
 		};
 		C830C666F2B54E4FA4F90CD6 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

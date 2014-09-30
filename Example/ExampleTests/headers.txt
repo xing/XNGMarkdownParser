@@ -1,0 +1,36 @@
+# Header 1
+## Header 2
+### Header 3
+#### Header 4
+##### Header 5
+###### Header 6
+
+
+Header 1
+========
+
+Header 2
+--------
+
+
+Header 1 again
+==============
+
+Testing with some default text
+
+Now comes a header 2
+--------------------
+
+With more text in the middle
+And another line
+
+## And another header 2
+
+And we finish here
+
+
+
+Invalid cases
+=============
+
+########## No header here (max is 6 in CommonMark)

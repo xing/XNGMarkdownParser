@@ -23,11 +23,7 @@
 }
 
 - (void)setupMarkDownAttributedString {
-    NSString *markdown = @"####### invalid header (7)\n"
-    "dasdas dasd adasd adasdas\n"
-    "dadasddas\n"
-    "### valid header 3\n"
-    "more stuff\n";
+    NSString *markdown = [self markdownFromBundle:@"links.txt"];
     
     NSUInteger times = 1;
     NSMutableString *accum = [[NSMutableString alloc] initWithCapacity:times * markdown.length];
@@ -50,6 +46,12 @@
     NSLog(@"time to format: %.0f ms", timeDif * 1000);
 
     self.textView.attributedText = attr;
+}
+
+- (NSString *)markdownFromBundle:(NSString*)filename {
+    NSBundle * bundle = [NSBundle bundleForClass:self.class];
+    NSString * path = [bundle pathForResource:filename ofType:nil];
+    return [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
 }
 
 
