@@ -18,21 +18,26 @@
 # limitations under the License.
 #
 
-echo "srcroot: $SRCROOT"
-
 GRAMMAR_DIR="$SRCROOT/../grammar"
 SOURCE_DIR="$SRCROOT/../src"
+LEX_OUTPUT="$GRAMMAR_DIR/lex.xng_markdown.c"
+NEW_TOKENIZER="$GRAMMAR_DIR/XNGMarkdownTokenizer.cpp"
+SRC_TOKENIZER="$SOURCE_DIR/XNGMarkdownTokenizer.cpp"
 
-echo "output: $GRAMMAR_DIR/markdown.grammar"
+flex --prefix=xng_markdown --nounput --outfile=$LEX_OUTPUT $GRAMMAR_DIR/markdown.grammar
 
+cat $GRAMMAR_DIR/MarkdownTokenizerPrefix > $NEW_TOKENIZER
+cat $LEX_OUTPUT >> $NEW_TOKENIZER
 
-flex --prefix=xng_markdown --nounput --outfile=$GRAMMAR_DIR/lex.xng_markdown.c $GRAMMAR_DIR/markdown.grammar
+rm $LEX_OUTPUT
 
-cat $GRAMMAR_DIR/MarkdownTokenizerPrefix > $GRAMMAR_DIR/XNGMarkdownTokenizer.cpp
-cat $GRAMMAR_DIR/lex.xng_markdown.c >> $GRAMMAR_DIR/XNGMarkdownTokenizer.cpp
+#move files only if the newly generated file is different
+if diff $NEW_TOKENIZER $SRC_TOKENIZER >/dev/null ; then
+  echo "Files are same, not copying"
+else
+  echo "Files differ, copy tokenizer to src"
+  mv $NEW_TOKENIZER $SRC_TOKENIZER
+  cp $GRAMMAR_DIR/XNGMarkdownTokens.cpp $SOURCE_DIR/XNGMarkdownTokens.m
+  cp $GRAMMAR_DIR/XNGMarkdownTokens.h $SOURCE_DIR/XNGMarkdownTokens.h
+fi
 
-rm $GRAMMAR_DIR/lex.xng_markdown.c
-
-mv $GRAMMAR_DIR/XNGMarkdownTokenizer.cpp $SOURCE_DIR/XNGMarkdownTokenizer.m
-cp $GRAMMAR_DIR/XNGMarkdownTokens.cpp $SOURCE_DIR/XNGMarkdownTokens.m
-cp $GRAMMAR_DIR/XNGMarkdownTokens.h $SOURCE_DIR/XNGMarkdownTokens.h
