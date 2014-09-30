@@ -15,26 +15,26 @@
     FBSnapshotVerifyView(textView, nil);
 }
 
-- (void)testHeaders {
-    UITextView *textView = [self defaultTextView];
-    textView.attributedText = [self parseWithDefaultAttributes:[self markdownFromFile:@"headers"]];
-    
-    FBSnapshotVerifyView(textView, nil);
-}
-
-- (void)testLinks {
-    UITextView *textView = [self defaultTextView];
-    textView.attributedText = [self parseWithDefaultAttributes:[self markdownFromFile:@"links"]];
-    
-    FBSnapshotVerifyView(textView, nil);
-}
-
-- (void)testTextStyles {
-    UITextView *textView = [self defaultTextView];
-    textView.attributedText = [self parseWithDefaultAttributes:[self markdownFromFile:@"text_styles"]];
-    
-    FBSnapshotVerifyView(textView, nil);
-}
+//- (void)testHeaders {
+//    UITextView *textView = [self defaultTextView];
+//    textView.attributedText = [self parseWithDefaultAttributes:[self markdownFromFile:@"headers"]];
+//    
+//    FBSnapshotVerifyView(textView, nil);
+//}
+//
+//- (void)testLinks {
+//    UITextView *textView = [self defaultTextView];
+//    textView.attributedText = [self parseWithDefaultAttributes:[self markdownFromFile:@"links"]];
+//    
+//    FBSnapshotVerifyView(textView, nil);
+//}
+//
+//- (void)testTextStyles {
+//    UITextView *textView = [self defaultTextView];
+//    textView.attributedText = [self parseWithDefaultAttributes:[self markdownFromFile:@"text_styles"]];
+//    
+//    FBSnapshotVerifyView(textView, nil);
+//}
 
 - (void)testBasicFormat {
     UITextView *textView = [self defaultTextView];
