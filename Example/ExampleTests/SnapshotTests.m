@@ -12,7 +12,7 @@
     UITextView * textView = [self defaultTextView];
     textView.attributedText = [self parseWithDefaultAttributes:@"This is just some plaintext to test the markdown parser, with some UTF-8: ÄÖÜäöüßñ©€"];
 
-    FBSnapshotVerifyView(textView, @"Snapshot");
+    FBSnapshotVerifyView(textView, nil);
 }
 
 - (void)testLinks {
@@ -23,7 +23,7 @@
                                "and then [a normal link](http://www.xing.com) again "
                                "plus [more brackets\\[ (opening)](http://www.xing.com) ."];
 
-    FBSnapshotVerifyView(textView, @"Snapshot");
+    FBSnapshotVerifyView(textView, nil);
 }
 
 - (void)testBasicFormat {
@@ -32,7 +32,7 @@
                                "This is **bold**, now *some italic*, I like ***both together***.\n"
                                "[this is a link](http://www.google.com) and at the end, `[some code]`"];
 
-    FBSnapshotVerifyView(textView, @"Snapshot");
+    FBSnapshotVerifyView(textView, nil);
 }
 
 - (void)testFontChange {
@@ -50,7 +50,7 @@
           forHeader:XNGMarkdownParserHeader1];
     textView.attributedText = [parser attributedStringFromMarkdownString:markdown];
 
-    FBSnapshotVerifyView(textView, @"Snapshot");
+    FBSnapshotVerifyView(textView, nil);
 }
 
 - (void)testParagraphAttributes {
@@ -71,7 +71,7 @@
                              };
     textView.attributedText = [parser attributedStringFromMarkdownString:markdown];
 
-    FBSnapshotVerifyView(textView, @"Snapshot");
+    FBSnapshotVerifyView(textView, nil);
 }
 
 - (UITextView *)defaultTextView {
