@@ -2,8 +2,6 @@
 #import <FBSnapshotTestCase/FBSnapshotTestCase.h>
 #import <XNGMarkdownParser/XNGMarkdownParser.h>
 
-#define kRecordModeAll NO
-
 @interface ExampleTests : FBSnapshotTestCase
 
 @end
@@ -11,7 +9,6 @@
 @implementation ExampleTests
 
 - (void)testPlainText {
-    self.recordMode = kRecordModeAll;
     UITextView * textView = [self defaultTextView];
     textView.attributedText = [self parseWithDefaultAttributes:@"This is just some plaintext to test the markdown parser, with some UTF-8: ÄÖÜäöüßñ©€"];
 
@@ -19,7 +16,6 @@
 }
 
 - (void)testLinks {
-    self.recordMode = kRecordModeAll;
     UITextView * textView = [self defaultTextView];
     textView.attributedText = [self parseWithDefaultAttributes:@"bla [normal link](http://www.xing.com) with "
                                "[link with \\[embedded brackets\\]](http://www.xing.com), followed by "
@@ -31,7 +27,6 @@
 }
 
 - (void)testBasicFormat {
-    self.recordMode = kRecordModeAll;
     UITextView * textView = [self defaultTextView];
     textView.attributedText = [self parseWithDefaultAttributes:@"#This is a header 1\n"
                                "This is **bold**, now *some italic*, I like ***both together***.\n"
@@ -41,7 +36,6 @@
 }
 
 - (void)testFontChange {
-    self.recordMode = kRecordModeAll;
     UITextView * textView = [self defaultTextView];
     NSString * markdown = @"#This is a header 1\n"
     "This is **bold**, now *some italic*, I like ***both together***.\n"
@@ -60,7 +54,6 @@
 }
 
 - (void)testParagraphAttributes {
-    self.recordMode = kRecordModeAll;
     UITextView * textView = [self defaultTextView];
     NSString * markdown = @"Lorem fistrum **benemeritaar** jarl pupita fistro qué dise usteer quietooor **papaar papaar** va usté muy cargadoo sexuarl. Tiene musho peligro [pecador](http://www.wikileaks.org) *te va a hasé pupitaa ese que llega*.\n"
     "A gramenawer `va usté muy cargadoo` te va a hasé pupitaa amatomaa condemor a wan te va a hasé pupitaa ese hombree ese pedazo de. Mamaar caballo blanco caballo negroorl ese que llega pecador me cago en tus muelas a wan se calle ustée va usté muy cargadoo. Hasta luego Lucas tiene musho peligro va usté muy cargadoo papaar papaar apetecan. Papaar papaar benemeritaar pecador va usté muy cargadoo hasta luego Lucas.\n"
