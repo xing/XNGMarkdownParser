@@ -1,5 +1,6 @@
 //
 // Copyright 2011-2014 NimbusKit
+// Copyright 2014 XING AG
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,18 +15,18 @@
 // limitations under the License.
 //
 
-const char *xng_markdownnames[] = {
-    "EM",
-    "STRONG",
-    "STRONGEM",
-    "STRIKETHROUGH",
-    "HEADER",
-    "MULTILINEHEADER",
-    "URL",
-    "HREF",
-    "PARAGRAPH",
-    "NEWLINE",
-    "BULLETSTART",
-    "MARKDOWNCODESPAN",
-    "UNKNOWN"
+const char* xng_markdownnames[] = {
+  "EM",
+  "STRONG",
+  "STRONGEM",
+  "STRIKETHROUGH",
+  "HEADER",
+  "MULTILINEHEADER",
+  "URL",
+  "HREF",
+  "PARAGRAPH",
+  "NEWLINE",
+  "BULLETSTART",
+  "MARKDOWNCODESPAN",
+  "UNKNOWN"
 };

@@ -23,7 +23,7 @@
 #import <CoreText/CoreText.h>
 #import <pthread.h>
 
-int xng_markdown_consume(char *text, int token, yyscan_t scanner);
+int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scanner);
 
 @interface XNGMarkdownLink ()
 @property (nonatomic, strong) NSString *url;
@@ -252,7 +252,7 @@ int xng_markdown_consume(char *text, int token, yyscan_t scanner);
     }
 }
 
-- (void)consumeToken:(int)token text:(char *)text {
+- (void)consumeToken:(XNGMarkdownParserCode)token text:(char *)text {
     NSString *textAsString = [[NSString alloc] initWithCString:text encoding:NSUTF8StringEncoding];
 
     NSMutableDictionary *attributes;
@@ -263,7 +263,8 @@ int xng_markdown_consume(char *text, int token, yyscan_t scanner);
     }
     [attributes addEntriesFromDictionary:[self attributesForFont:self.topFont]];
 
-    switch (token) {
+    XNGMarkdownParserCode codeToken = token;
+    switch (codeToken) {
         case MARKDOWN_EM: { // * *
             textAsString = [textAsString substringWithRange:NSMakeRange(1, textAsString.length - 2)];
             [attributes addEntriesFromDictionary:[self attributesForFontWithName:self.italicFontName]];
@@ -400,7 +401,7 @@ int xng_markdown_consume(char *text, int token, yyscan_t scanner);
 
 @end
 
-int xng_markdown_consume(char *text, int token, yyscan_t scanner) {
+int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scanner) {
     XNGMarkdownParser *string = (__bridge XNGMarkdownParser *)(xng_markdownget_extra(scanner));
     [string consumeToken:token text:text];
     return 0;

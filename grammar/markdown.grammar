@@ -17,7 +17,8 @@ utf_8          {u2a}|{u2b}|{u3a}|{u3b}|{u4a}|{u4b}|{u4c}
 /*
  * Greatly improves parser speed by passing whole phrases instead of chars
 */
-phrase         ({utf_8}|[a-zA-Z0-9]|[ ])*
+word           ({utf_8}|[a-zA-Z0-9])+
+phrase         ({utf_8}|[a-zA-Z0-9]|[ ])+([ ]|,|\.|;)
 
 h              [0-9a-f]
 nonascii       [\200-\377]
@@ -66,10 +67,12 @@ nl             \n|\r\n|\r|\f
 {href}                          {xng_markdown_consume(yytext, MARKDOWN_HREF, yyscanner);}
 {bulletstart}                   {xng_markdown_consume(yytext, MARKDOWN_BULLETSTART, yyscanner);}
 
+{phrase}                        {xng_markdown_consume(yytext, MARKDOWN_PHRASE, yyscanner);}
+{word}                          {xng_markdown_consume(yytext, MARKDOWN_WORD, yyscanner);}
 [ ]{2,}$                        {xng_markdown_consume(yytext, MARKDOWN_NEWLINE, yyscanner);}
 [\n]{2,}                        {xng_markdown_consume(yytext, MARKDOWN_PARAGRAPH, yyscanner);}
-[ \n\t\f]                       {xng_markdown_consume(yytext, MARKDOWN_UNKNOWN, yyscanner);}
-{phrase}                        {xng_markdown_consume(yytext, MARKDOWN_UNKNOWN, yyscanner);}
+[\n\t\f]+                       {xng_markdown_consume(yytext, MARKDOWN_UNKNOWN, yyscanner);}
+{utf_8}*                        {xng_markdown_consume(yytext, MARKDOWN_UNKNOWN, yyscanner);}
 .                               {xng_markdown_consume(yytext, MARKDOWN_UNKNOWN, yyscanner);}
 
 %%

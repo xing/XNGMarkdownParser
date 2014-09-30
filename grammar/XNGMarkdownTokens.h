@@ -31,8 +31,10 @@ typedef enum {
   MARKDOWN_NEWLINE,
   MARKDOWN_BULLETSTART,
   MARKDOWN_CODESPAN,
+  MARKDOWN_PHRASE,
+  MARKDOWN_WORD,
   MARKDOWN_UNKNOWN,
-} XNGMarkdownParserCodes;
+} XNGMarkdownParserCode;
 
 extern const char* xng_markdownnames[];
 
@@ -48,7 +50,7 @@ int xng_markdownlex_destroy(yyscan_t yyscanner);
 void xng_markdownset_in(FILE * in_str, yyscan_t yyscanner);
 
 int xng_markdownlex(yyscan_t yyscanner);
-int xng_markdown_consume(char* text, int token, yyscan_t yyscanner);
+int xng_markdown_consume(char* text, XNGMarkdownParserCode token, yyscan_t yyscanner);
 int xng_markdownget_lineno(yyscan_t scanner);
 
 #define MARKDOWN_EXTRA_TYPE  void*

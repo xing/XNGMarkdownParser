@@ -23,9 +23,9 @@
 }
 
 - (void)setupMarkDownAttributedString {
-    NSString *markdown = @"normal [fistro \\[<escape brackets >\\]](http://www.xing.com) text with **bold** and (31231) [link\\[escape me\\] blabla](http://www.xing.com) with some more ÜÄäñß and [link](http://www.xing.com) wow";
+    NSString *markdown = @"hTTp://www.xing.com esto es una frase en medio http://www.xing.com ";
     
-    NSUInteger times = 500;
+    NSUInteger times = 1;
     NSMutableString *accum = [[NSMutableString alloc] initWithCapacity:times * markdown.length];
     for (NSUInteger i = 0; i < times; ++i) {
         [accum appendString:markdown];
