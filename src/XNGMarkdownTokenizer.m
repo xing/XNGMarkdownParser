@@ -21,9 +21,8 @@
 #define YY_NO_INPUT
 
 #include "XNGMarkdownTokens.h"
-#line 2 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/lex.xng_markdown.c"
 
-#line 4 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/lex.xng_markdown.c"
+#line 3 "lex.xng_markdown.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -1019,7 +1018,7 @@ static yyconst flex_int16_t yy_chk[2078] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 1 "markdown.grammar"
 /*
  * match unicode characters as one rule instead of each byte.
  * http://stackoverflow.com/questions/10252777/making-lex-to-read-utf-8-doesnt-work?lq=1
@@ -1027,7 +1026,7 @@ static yyconst flex_int16_t yy_chk[2078] =
 /*
  * Greatly improves parser speed by passing whole phrases instead of chars
 */
-#line 1008 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/lex.xng_markdown.c"
+#line 1007 "lex.xng_markdown.c"
 
 #define INITIAL 0
 
@@ -1249,10 +1248,10 @@ YY_DECL
 	register int yy_act;
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
-#line 57 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 57 "markdown.grammar"
 
 
-#line 1233 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/lex.xng_markdown.c"
+#line 1232 "lex.xng_markdown.c"
 
 	if ( !yyg->yy_init )
 		{
@@ -1339,29 +1338,29 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 59 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 59 "markdown.grammar"
 {xng_markdown_consume(yytext, MARKDOWN_EM, yyscanner);}
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 60 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 60 "markdown.grammar"
 {xng_markdown_consume(yytext, MARKDOWN_STRONG, yyscanner);}
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 61 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 61 "markdown.grammar"
 {xng_markdown_consume(yytext, MARKDOWN_STRONGEM, yyscanner);}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 62 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 62 "markdown.grammar"
 {xng_markdown_consume(yytext, MARKDOWN_STRIKETHROUGH, yyscanner);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 63 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 63 "markdown.grammar"
 {xng_markdown_consume(yytext, MARKDOWN_CODESPAN, yyscanner);}
 	YY_BREAK
 case 6:
@@ -1370,40 +1369,40 @@ case 6:
 yyg->yy_c_buf_p = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 64 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 64 "markdown.grammar"
 {xng_markdown_consume(yytext, MARKDOWN_HEADER, yyscanner);}
 	YY_BREAK
 case 7:
 /* rule 7 can match eol */
 YY_RULE_SETUP
-#line 65 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 65 "markdown.grammar"
 {xng_markdown_consume(yytext, MARKDOWN_MULTILINEHEADER, yyscanner);}
 	YY_BREAK
 case 8:
 /* rule 8 can match eol */
 YY_RULE_SETUP
-#line 66 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 66 "markdown.grammar"
 {xng_markdown_consume(yytext, MARKDOWN_URL, yyscanner);}
 	YY_BREAK
 case 9:
 /* rule 9 can match eol */
 YY_RULE_SETUP
-#line 67 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 67 "markdown.grammar"
 {xng_markdown_consume(yytext, MARKDOWN_HREF, yyscanner);}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 68 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 68 "markdown.grammar"
 {xng_markdown_consume(yytext, MARKDOWN_BULLETSTART, yyscanner);}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 70 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 70 "markdown.grammar"
 {xng_markdown_consume(yytext, MARKDOWN_PHRASE, yyscanner);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 71 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 71 "markdown.grammar"
 {xng_markdown_consume(yytext, MARKDOWN_WORD, yyscanner);}
 	YY_BREAK
 case 13:
@@ -1411,37 +1410,37 @@ case 13:
 yyg->yy_c_buf_p = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 72 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 72 "markdown.grammar"
 {xng_markdown_consume(yytext, MARKDOWN_NEWLINE, yyscanner);}
 	YY_BREAK
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
-#line 73 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 73 "markdown.grammar"
 {xng_markdown_consume(yytext, MARKDOWN_PARAGRAPH, yyscanner);}
 	YY_BREAK
 case 15:
 /* rule 15 can match eol */
 YY_RULE_SETUP
-#line 74 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 74 "markdown.grammar"
 {xng_markdown_consume(yytext, MARKDOWN_UNKNOWN, yyscanner);}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 75 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 75 "markdown.grammar"
 {xng_markdown_consume(yytext, MARKDOWN_UNKNOWN, yyscanner);}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 76 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 76 "markdown.grammar"
 {xng_markdown_consume(yytext, MARKDOWN_UNKNOWN, yyscanner);}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 78 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 78 "markdown.grammar"
 ECHO;
 	YY_BREAK
-#line 1422 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/lex.xng_markdown.c"
+#line 1421 "lex.xng_markdown.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2560,7 +2559,7 @@ void xng_markdownfree (void * ptr , yyscan_t yyscanner)
 
 #define YYTABLES_NAME "yytables"
 
-#line 78 "/Users/jose.alcala/code/XNGMarkdownParser/Example/../grammar/markdown.grammar"
+#line 78 "markdown.grammar"
 
 
 
