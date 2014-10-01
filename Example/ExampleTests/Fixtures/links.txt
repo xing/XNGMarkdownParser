@@ -1,9 +1,46 @@
+Basic, unformatted links
+========================
+
+http://xing.com/
++
+https://xing.com/
++
+https://www.xing.com/
++
 www.xing.com
-
++
+xing.com
++
+https://xing.com/root/path
++
+https://www.xing.com/root/path
++
 www.xing.com/root/path
++
+xing.com/root/path
 
-http://dasdas.dsd
+Links with escaped brackets
+===========================
 
-**bold**
+[this a \[bracket\] inside a link](www.xing.com)
++
+[\[bracket\]](www.xing.com)
++
+[only right \] inside](www.xing.com)
++
+[only left \[ inside](www.xing.com)
 
-[dasdas](dasda)
+Invalid stuff
+=============
+
+[dsadjasklkjda(dasdas)
+
+]invalid stuff[)dasdasdas(]
+
+
+Stress test
+===========
+
+won't work because they have to be together, will detect only link inside parenthesis -> [Text] (http://google.com "alt text") urls
+
+bla [normal link](http://www.xing.com) with [link with \\[embedded brackets\\]](http://www.xing.com), followed by [link with \\[embedded brackets\\] and sth](http://www.xing.com) and more stuff []like an invalid(link) and then [a normal link](http://www.xing.com) again plus [more brackets\\[ (opening)](http://www.xing.com) .

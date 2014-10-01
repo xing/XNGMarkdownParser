@@ -10,45 +10,27 @@
 
 - (void) setUp {
     [super setUp];
-
+    self.recordMode = NO;
 }
 
 - (void)testPlainText {
-    UITextView *textView = [self defaultTextView];
-    NSAttributedString * attr = [self parseWithDefaultAttributes:@"This is just some plaintext to test the markdown parser, with some UTF-8: ÄÖÜäöüßñ©€"];
-    [self setAttributedTextAndResizeAutomatically:attr
-                                       inTextView:textView];
-
-    FBSnapshotVerifyView(textView, nil);
+    FBSnapshotVerifyView([self textViewForMarkdownStringWithDefaultAttributesFromFile:@"plaintext_utf8.txt"], nil);
 }
 
 - (void)testHeaders {
-    [self testMarkdownFileWithDefaultAttributes:@"headers.txt"];
+    FBSnapshotVerifyView([self textViewForMarkdownStringWithDefaultAttributesFromFile:@"headers.txt"], nil);
 }
 
 - (void)testLinks {
-    [self testMarkdownFileWithDefaultAttributes:@"links.txt"];
+    FBSnapshotVerifyView([self textViewForMarkdownStringWithDefaultAttributesFromFile:@"links.txt"], nil);
 }
-/*
+
 - (void)testTextStyles {
-    self.recordMode = YES;
-    [self testMarkdownFileWithDefaultAttributes:@"text_styles"];
-}*/
-
-- (void)testBasicFormat {
-    UITextView *textView = [self defaultTextView];
-    textView.attributedText = [self parseWithDefaultAttributes:@"#This is a header 1\n"
-                               "This is **bold**, now *some italic*, I like ***both together***.\n"
-                               "[this is a link](http://www.google.com) and at the end, `[some code]`"];
-
-    FBSnapshotVerifyView(textView, nil);
+    FBSnapshotVerifyView([self textViewForMarkdownStringWithDefaultAttributesFromFile:@"text_styles.txt"], nil);
 }
 
 - (void)testFontChange {
-    UITextView *textView = [self defaultTextView];
-    NSString *markdown = @"#This is a header 1\n"
-    "This is **bold**, now *some italic*, I like ***both together***.\n"
-    "[this is a link](http://www.google.com) and at the end, `[some code]`";
+    NSString *markdown = [self markdownFromFile:@"all_together_short.txt"];
 
     XNGMarkdownParser * parser = [[XNGMarkdownParser alloc] init];
     parser.paragraphFont = [UIFont fontWithName:@"Damascus" size:15];
@@ -57,23 +39,21 @@
     parser.linkFontName = @"Futura-Medium";
     [parser setFont:[UIFont fontWithName:@"Copperplate" size:24]
           forHeader:XNGMarkdownParserHeader1];
-    textView.attributedText = [parser attributedStringFromMarkdownString:markdown];
+    NSAttributedString * attr = [parser attributedStringFromMarkdownString:markdown];
 
-    FBSnapshotVerifyView(textView, nil);
+    FBSnapshotVerifyView([self defaultTextViewWithAttributedString:attr], nil);
 }
 
 - (void)testParagraphAttributes {
     UITextView *textView = [self defaultTextView];
-    NSString *markdown = @"Lorem fistrum **benemeritaar** jarl pupita fistro qué dise usteer quietooor **papaar papaar** va usté muy cargadoo sexuarl. Tiene musho peligro [pecador](http://www.wikileaks.org) *te va a hasé pupitaa ese que llega*.\n"
-    "A gramenawer `va usté muy cargadoo` te va a hasé pupitaa amatomaa condemor a wan te va a hasé pupitaa ese hombree ese pedazo de. Mamaar caballo blanco caballo negroorl ese que llega pecador me cago en tus muelas a wan se calle ustée va usté muy cargadoo. Hasta luego Lucas tiene musho peligro va usté muy cargadoo papaar papaar apetecan. Papaar papaar benemeritaar pecador va usté muy cargadoo hasta luego Lucas.\n"
-    "Tiene musho **peligro** al ataquerl a peich ese pedazo de tiene musho peligro jarl te voy a borrar el cerito amatomaa apetecan. Te va a hasé pupitaa diodenoo no te digo trigo por no llamarte Rodrigor ***ese pedazo de fistro caballo blanco caballo negroorl*** va usté muy cargadoo. De la pradera por la gloria de mi madre sexuarl al ataquerl jarl. Condemor tiene musho peligro benemeritaar te va a hasé pupitaa pecador mamaar no te digo trigo por no llamarte Rodrigor.";
+    NSString * markdown = [self markdownFromFile:@"paragraph_1.txt"];
 
     XNGMarkdownParser *parser = [[XNGMarkdownParser alloc] init];
     NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowOffset = CGSizeMake(1, 0.5);
+    shadow.shadowOffset = CGSizeMake(0.5, 0.5);
     shadow.shadowBlurRadius = 0.5;
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = 5;
+    paragraphStyle.lineSpacing = 6;
     parser.topAttributes = @{NSForegroundColorAttributeName : [UIColor darkGrayColor],
                              NSShadowAttributeName : shadow,
                              NSParagraphStyleAttributeName : paragraphStyle,
@@ -83,21 +63,28 @@
     FBSnapshotVerifyView(textView, nil);
 }
 
-#pragma mark - Helper
+#pragma mark - Helper methods
 
-- (void) testMarkdownFileWithDefaultAttributes:(NSString*)fileName {
+- (UITextView*) textViewForMarkdownStringWithDefaultAttributesFromFile:(NSString*)fileName {
     UITextView *textView = [self defaultTextView];
     NSAttributedString * attrString = [self parseWithDefaultAttributes:[self markdownFromFile:fileName]];
     [self setAttributedTextAndResizeAutomatically:attrString
                                        inTextView:textView];
+    return textView;
+}
 
-    FBSnapshotVerifyView(textView, nil);
+- (UITextView*) defaultTextViewWithAttributedString:(NSAttributedString*)attr {
+    UITextView * textView = [self defaultTextView];
+    [self setAttributedTextAndResizeAutomatically:attr inTextView:textView];
+    return textView;
 }
 
 - (void)setAttributedTextAndResizeAutomatically:(NSAttributedString*)attrString
                                      inTextView:(UITextView*)view
 {
     view.attributedText = attrString;
+    CGSize size = [view sizeThatFits:CGSizeMake(320, CGFLOAT_MAX)];
+    view.frame = CGRectMake(0, 0, size.width, size.height);
 }
 
 - (UITextView *)defaultTextView {

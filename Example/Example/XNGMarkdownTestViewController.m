@@ -23,7 +23,7 @@
 }
 
 - (void)setupMarkDownAttributedString {
-    NSString *markdown = [self markdownFromBundle:@"links.txt"];
+    NSString *markdown = [self markdownFromBundle:@"all_together_short.txt"];
     
     NSUInteger times = 1;
     NSMutableString *accum = [[NSMutableString alloc] initWithCapacity:times * markdown.length];

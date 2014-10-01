@@ -1,0 +1,4 @@
+This is just some plaintext to test the markdown parser, with some UTF-8:
+Umlauts: ÄËÏÖÜäëïöüß
+Tildes: ÁÉÍÓÚáéíóúÀÈÌÒÙàèìòù
+Other chars: ñ©€♫♺☀♘

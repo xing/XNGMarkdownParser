@@ -1,0 +1,22 @@
+#This is a header 1
+
+In the first paragraph we have **bold**, now *some italic*, I like ***both together***.
+[this is a link](http://www.google.com) and at the end, `[some code]`
+
+Code test
+---------
+
+`We also have some code here, but formatting is not supported inside it: [having links](www.xing.com), **bold**, *italic*, ***and so on*** `
+
+`We can't, however,
+have breaks inside code blocks`
+
+
+List
+----
+
+- A list with [a link](www.chiquitoipsum.com)
+- Another element **with** *stuff*
+- `with_code_inside()`
+- #We can't have a header, the header (#) symbol can be only at the beginning of the line
+- www.xing.com is also detected
