@@ -4,7 +4,7 @@ workspace '../XNGMarkdownParser'
 xcodeproj 'Example.xcodeproj'
 
 target "Example" do
-  pod "XNGMarkdownParser", :path => "../XNGMarkdownParser.podspec"
+  pod 'XNGMarkdownParser', :path => '..'
 end
 
 target "ExampleTests" do
