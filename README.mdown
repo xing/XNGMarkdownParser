@@ -1,24 +1,28 @@
-A Markdown NSAttributedString Parser
-====================================
+# XNGMarkdownParser - A Markdown NSAttributedString Parser
 
 [![Build Status](http://img.shields.io/travis/xing/XNGMarkdownParser/master.svg?style=flat)](https://travis-ci.org/xing/XNGMarkdownParser)
 [![Coverage Status](http://img.shields.io/coveralls/xing/XNGMarkdownParser/master.svg?style=flat)](https://coveralls.io/r/xing/XNGMarkdownParser)
+[![Dependency Status](https://www.versioneye.com/user/projects/5444ac9e53acfaa9b20000d6/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5444ac9e53acfaa9b20000d6)
 
 This is a Markdown => NSAttributedString parser built on top of a flex parser. It takes an NSString
 and returns an NSAttributedString with markdown tags replaced by CoreText formatting attributes.
 
 This project is a fork of NSAttributedMarkdownParser by NimbusKit: https://github.com/NimbusKit/markdown
 
-Adding it to your Project
--------------------------
+## Adding it to your Project
+
+### Using cocoapods
+
+Add `pod 'XNGMarkdownParser'` to your Podfile and do a `pod install`.
+
+### Manual
 
 1. Drag all of the files from the src/ directory into your project.
 2. Import XNGMarkdownParser.h in your project.
 3. Create an instance of the parser object and pass it the string you wish to parse.
 4. Plug the resulting NSAttributedString into your favorite NSAttributedString label implementation (like an UITextView)
 
-Supported Features
-------------------
+## Supported Features
 
     *italics*
     **bold**
@@ -41,8 +45,8 @@ Supported Features
     http://google.com urls
     [Text] (http://google.com "alt text") urls
 
-Extended Features
------------------
+## Extended Features
+
 * UTF-8 support
 * Vastly improved speed
 * Extended formatting for paragraphs
@@ -50,11 +54,10 @@ Extended Features
 * Tests and example project
 * Support for CocoaPods (soon!)
 
-Example
--------
+## Example
 
-    XNGMarkdownParser* parser = [[XNGMarkdownParser alloc] init];
-    NSAttributedString* string = [parser attributedStringFromMarkdownString:@"This is __rad__."];
+    XNGMarkdownParser *parser = [[XNGMarkdownParser alloc] init];
+    NSAttributedString *string = [parser attributedStringFromMarkdownString:@"This is __rad__."];
 
 See the included Example project and the tests to check for further options.
 
