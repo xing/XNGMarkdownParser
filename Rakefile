@@ -37,11 +37,8 @@ task :version do
   replace_version_number(new_version_number)
 end
 
-desc "Release a new version of the Pod (append repo=name to push to a private spec repo)"
+desc "Release a new version of the Pod"
 task :release do
-  # Allow override of spec repo name using `repo=private` after task name
-  repo = ENV["repo"] || "master"
-
   puts "* Running version"
   sh "rake version"
 
@@ -71,7 +68,7 @@ task :release do
   sh "git tag -a #{spec_version} -m 'Release #{spec_version}'"
   sh "git push origin master"
   sh "git push origin --tags"
-  sh "pod push #{repo} #{podspec_path}"
+  sh "pod trunk push #{podspec_path}"
 end
 
 # @return [Pod::Version] The version as reported by the Podspec.
