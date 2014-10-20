@@ -12,6 +12,9 @@ Header 1 with '='
 Header 2 with '-'
 -----------------
 
+Header 1 [with a link](http://www.xing.com) inside
+==================================================
+
 
 Header 1 again
 ==============

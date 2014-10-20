@@ -215,21 +215,6 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
     }
 }
 
-- (id)keyForFontWithName:(NSString *)fontName pointSize:(CGFloat)pointSize {
-    return [fontName stringByAppendingFormat:@"%f", pointSize];
-}
-
-- (CTFontRef)fontRefForFontWithName:(NSString *)fontName pointSize:(CGFloat)pointSize {
-    id key = [self keyForFontWithName:fontName pointSize:pointSize];
-    NSValue *value = _fontCache[key];
-    if (nil == value) {
-        CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)fontName, pointSize, nil);
-        value = [NSValue valueWithPointer:fontRef];
-        _fontCache[key] = value;
-    }
-    return [value pointerValue];
-}
-
 - (NSDictionary *)attributesForFontWithName:(NSString *)fontName {
     return @{NSFontAttributeName: [UINSFont fontWithName:fontName size:self.topFont.pointSize]};
 }
@@ -241,15 +226,12 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
 - (void)recurseOnString:(NSString *)string withFont:(UINSFont *)font {
     XNGMarkdownParser *recursiveParser = [self copy];
     recursiveParser->_topFont = font;
-    [_accum appendAttributedString:[recursiveParser attributedStringFromMarkdownString:string]];
 
-    // Adjust the recursive parser's links so that they are offset correctly.
-    for (XNGMarkdownLink *currentLink in recursiveParser.links) {
-        NSRange range = [currentLink range];
-        range.location += _accum.length;
-        currentLink.range = range;
-        [_links addObject:currentLink];
-    }
+    NSAttributedString *recursedString =[recursiveParser attributedStringFromMarkdownString:string];
+    NSMutableAttributedString *mutableRecursiveString = [[NSMutableAttributedString alloc] initWithAttributedString:recursedString];
+    [mutableRecursiveString addAttributes:@{NSFontAttributeName : font}
+                                    range:NSMakeRange(0, recursedString.length)];
+    [_accum appendAttributedString:mutableRecursiveString];
 }
 
 - (void)consumeToken:(XNGMarkdownParserCode)token text:(char *)text {
@@ -304,6 +286,7 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
             break;
         }
         case MARKDOWN_MULTILINEHEADER: {
+            textAsString = [textAsString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             NSArray *components = [textAsString componentsSeparatedByString:@"\n"];
             textAsString = [components objectAtIndex:0];
             UINSFont *font = nil;
