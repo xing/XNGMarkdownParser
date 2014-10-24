@@ -55,12 +55,14 @@ Add `pod 'XNGMarkdownParser'` to your Podfile and do a `pod install`.
 * Extended formatting for paragraphs
 * Support different link fonts
 * Tests and example project
-* Support for CocoaPods (soon!)
+* Support for CocoaPods
 
 ## Example
 
-    XNGMarkdownParser *parser = [[XNGMarkdownParser alloc] init];
-    NSAttributedString *string = [parser attributedStringFromMarkdownString:@"This is __rad__."];
+```objc
+XNGMarkdownParser *parser = [[XNGMarkdownParser alloc] init];
+NSAttributedString *string = [parser attributedStringFromMarkdownString:@"This is __rad__."];
+```
 
 See the included Example project and the tests to check for further options.
 
