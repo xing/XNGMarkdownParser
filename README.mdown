@@ -57,11 +57,40 @@ Add `pod 'XNGMarkdownParser'` to your Podfile and do a `pod install`.
 * Tests and example project
 * Support for CocoaPods
 
-## Example
+## Examples
+
+###Simplest example
 
 ```objc
 XNGMarkdownParser *parser = [[XNGMarkdownParser alloc] init];
 NSAttributedString *string = [parser attributedStringFromMarkdownString:@"This is __rad__."];
+```
+
+### Further text customization
+
+```objc
+// this parser initializes only once and customizes fonts, line height and link color
++ (XNGMarkdownParser *)titleMarkdownParser {
+    static dispatch_once_t onceToken;
+    static XNGMarkdownParser *parser;
+    dispatch_once(&onceToken, ^{
+        parser = [[XNGMarkdownParser alloc] init];
+ 
+        parser.paragraphFont = [UIFont xng_14Font];
+        parser.boldFontName = [UIFont xng_14Font].fontName;
+        parser.linkFontName = [UIFont xng_14Font].fontName;
+ 
+        const CGFloat lineHeight = 18;
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyle.minimumLineHeight = lineHeight;
+        parser.topAttributes = @{
+            NSParagraphStyleAttributeName: paragraphStyle,
+            NSForegroundColorAttributeName: self.textColor
+        };
+    });
+ 
+    return parser;
+}
 ```
 
 See the included Example project and the tests to check for further options.
