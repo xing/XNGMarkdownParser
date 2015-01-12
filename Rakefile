@@ -6,7 +6,7 @@ end
 
 desc "Runs the specs"
 task :spec do
-  sh 'xcodebuild -workspace XNGMarkdownParser.xcworkspace -scheme \'ExampleTests\' -destination platform=\'iOS Simulator\',OS=8.1,name=\'iPhone 5s\' test -sdk iphonesimulator | xcpretty -tc && exit ${PIPESTATUS[0]}'
+  sh 'xcodebuild -workspace XNGMarkdownParser.xcworkspace -scheme \'ExampleTests\' -destination platform=\'iOS Simulator\',OS=8.1,name=\'iPhone 5s\' test -sdk iphonesimulator8.1 | xcpretty -tc && exit ${PIPESTATUS[0]}'
 end
 
 task :version do
