@@ -2,7 +2,7 @@
 
 [![Build Status](http://img.shields.io/travis/xing/XNGMarkdownParser/master.svg?style=flat)](https://travis-ci.org/xing/XNGMarkdownParser)
 [![Coverage Status](http://img.shields.io/coveralls/xing/XNGMarkdownParser/master.svg?style=flat)](https://coveralls.io/r/xing/XNGMarkdownParser)
-[![Dependency Status](https://www.versioneye.com/user/projects/5444ac9e53acfaa9b20000d6/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5444ac9e53acfaa9b20000d6)
+[![Dependency Status](https://www.versioneye.com/objective-c/xngmarkdownparser/badge.svg)](https://www.versioneye.com/objective-c/xngmarkdownparser)
 ![CocoaPods Version](http://img.shields.io/cocoapods/v/XNGMarkdownParser.svg?style=flat)
 ![CocoaPods License](http://img.shields.io/cocoapods/l/XNGMarkdownParser.svg?style=flat)
 ![CocoaPods Platform](http://img.shields.io/cocoapods/p/XNGMarkdownParser.svg?style=flat)
