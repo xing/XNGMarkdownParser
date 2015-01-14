@@ -228,10 +228,14 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
     recursiveParser->_topFont = font;
 
     NSAttributedString *recursedString =[recursiveParser attributedStringFromMarkdownString:string];
-    NSMutableAttributedString *mutableRecursiveString = [[NSMutableAttributedString alloc] initWithAttributedString:recursedString];
-    [mutableRecursiveString addAttributes:@{NSFontAttributeName : font}
-                                    range:NSMakeRange(0, recursedString.length)];
-    [_accum appendAttributedString:mutableRecursiveString];
+    if(font != nil) {
+        NSMutableAttributedString *mutableRecursiveString = [[NSMutableAttributedString alloc] initWithAttributedString:recursedString];
+        [mutableRecursiveString addAttributes:@{NSFontAttributeName : font}
+                                        range:NSMakeRange(0, recursedString.length)];
+        [_accum appendAttributedString:mutableRecursiveString];
+    } else {
+        [_accum appendAttributedString:recursedString];
+    }
 }
 
 - (void)consumeToken:(XNGMarkdownParserCode)token text:(char *)text {
