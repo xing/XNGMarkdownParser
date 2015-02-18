@@ -56,6 +56,7 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
         self.codeFontName = @"Courier";
         self.linkFontName = self.paragraphFont.fontName;
         self.topAttributes = nil;
+        self.shouldParseLinks = YES;
 
         XNGMarkdownParserHeader header = XNGMarkdownParserHeader1;
         for (CGFloat headerFontSize = 24; headerFontSize >= 14; headerFontSize -= 2, header++) {
@@ -74,6 +75,7 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
     parser.codeFontName = self.codeFontName;
     parser.linkFontName = self.linkFontName;
     parser.topAttributes = self.topAttributes;
+    parser.shouldParseLinks = self.shouldParseLinks;
 
     for (XNGMarkdownParserHeader header = XNGMarkdownParserHeader1; header <= XNGMarkdownParserHeader6; ++header) {
         [parser setFont:[self fontForHeader:header] forHeader:header];
@@ -128,7 +130,7 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
     const BOOL shouldAddLinks = (NSLinkAttributeName != nil);
 #endif
 
-    if (shouldAddLinks) {
+    if (self.shouldParseLinks && shouldAddLinks) {
         [self addLinksToAttributedString];
     }
 
