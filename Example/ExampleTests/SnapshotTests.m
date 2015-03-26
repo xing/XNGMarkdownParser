@@ -14,19 +14,19 @@
 }
 
 - (void)testPlainText {
-    FBSnapshotVerifyView([self textViewForMarkdownStringWithDefaultAttributesFromFile:@"plaintext_utf8.txt"], nil);
+    FBSnapshotVerifyView([self labelForMarkdownStringWithDefaultAttributesFromFile:@"plaintext_utf8.txt"], nil);
 }
 
 - (void)testHeaders {
-    FBSnapshotVerifyView([self textViewForMarkdownStringWithDefaultAttributesFromFile:@"headers.txt"], nil);
+    FBSnapshotVerifyView([self labelForMarkdownStringWithDefaultAttributesFromFile:@"headers.txt"], nil);
 }
 
 - (void)testLinks {
-    FBSnapshotVerifyView([self textViewForMarkdownStringWithDefaultAttributesFromFile:@"links.txt"], nil);
+    FBSnapshotVerifyView([self labelForMarkdownStringWithDefaultAttributesFromFile:@"links.txt"], nil);
 }
 
 - (void)testTextStyles {
-    FBSnapshotVerifyView([self textViewForMarkdownStringWithDefaultAttributesFromFile:@"text_styles.txt"], nil);
+    FBSnapshotVerifyView([self labelForMarkdownStringWithDefaultAttributesFromFile:@"text_styles.txt"], nil);
 }
 
 - (void)testFontChange {
@@ -41,11 +41,11 @@
           forHeader:XNGMarkdownParserHeader1];
     NSAttributedString * attr = [parser attributedStringFromMarkdownString:markdown];
 
-    FBSnapshotVerifyView([self defaultTextViewWithAttributedString:attr], nil);
+    FBSnapshotVerifyView([self defaultLabelWithAttributedString:attr], nil);
 }
 
 - (void)testParagraphAttributes {
-    UITextView *textView = [self defaultTextView];
+    UILabel *label = [self defaultTextLabel];
     NSString * markdown = [self markdownFromFile:@"paragraph_1.txt"];
 
     XNGMarkdownParser *parser = [[XNGMarkdownParser alloc] init];
@@ -58,39 +58,42 @@
                              NSShadowAttributeName : shadow,
                              NSParagraphStyleAttributeName : paragraphStyle,
                              };
-    textView.attributedText = [parser attributedStringFromMarkdownString:markdown];
+    label.attributedText = [parser attributedStringFromMarkdownString:markdown];
 
-    FBSnapshotVerifyView(textView, nil);
+    FBSnapshotVerifyView(label, nil);
 }
 
 #pragma mark - Helper methods
 
-- (UITextView*) textViewForMarkdownStringWithDefaultAttributesFromFile:(NSString*)fileName {
-    UITextView *textView = [self defaultTextView];
+- (UILabel*)labelForMarkdownStringWithDefaultAttributesFromFile:(NSString*)fileName {
+    UILabel *label = [self defaultTextLabel];
     NSAttributedString * attrString = [self parseWithDefaultAttributes:[self markdownFromFile:fileName]];
     [self setAttributedTextAndResizeAutomatically:attrString
-                                       inTextView:textView];
-    return textView;
+                                          inLabel:label];
+    return label;
 }
 
-- (UITextView*) defaultTextViewWithAttributedString:(NSAttributedString*)attr {
-    UITextView * textView = [self defaultTextView];
-    [self setAttributedTextAndResizeAutomatically:attr inTextView:textView];
-    return textView;
+- (UILabel*)defaultLabelWithAttributedString:(NSAttributedString*)attr {
+    UILabel *label = [self defaultTextLabel];
+    [self setAttributedTextAndResizeAutomatically:attr inLabel:label];
+    return label;
 }
 
 - (void)setAttributedTextAndResizeAutomatically:(NSAttributedString*)attrString
-                                     inTextView:(UITextView*)view
+                                        inLabel:(UILabel*)view
 {
     view.attributedText = attrString;
     CGSize size = [view sizeThatFits:CGSizeMake(320, CGFLOAT_MAX)];
     view.frame = CGRectMake(0, 0, size.width, size.height);
+    [view setNeedsLayout];
+    [view layoutIfNeeded];
 }
 
-- (UITextView *)defaultTextView {
-    UITextView *tv = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    tv.editable = NO;
-    return tv;
+- (UILabel *)defaultTextLabel {
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    label.numberOfLines = 0;
+    label.backgroundColor = [UIColor whiteColor];
+    return label;
 }
 
 - (NSString *)markdownFromFile:(NSString *)name {
