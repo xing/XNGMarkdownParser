@@ -21,13 +21,4 @@ DerivedData
 
 Pods/
 
-.idea/workspace.xml
-.idea/tasks.xml
-
-.idea/dataSources.ids
-.idea/dataSources.xml
-.idea/sqlDataSources.xml
-.idea/dynamic.xml
-*.ipr
-*.iws
-*.iml
+.idea/
