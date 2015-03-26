@@ -1,6 +1,6 @@
 PODS:
-  - Expecta (0.3.1)
-  - FBSnapshotTestCase (1.4)
+  - Expecta (0.3.2)
+  - FBSnapshotTestCase (1.6)
   - XNGMarkdownParser (0.3.0)
 
 DEPENDENCIES:
@@ -13,8 +13,8 @@ EXTERNAL SOURCES:
     :path: ..
 
 SPEC CHECKSUMS:
-  Expecta: 03aabd0a89d8dea843baecb19a7fd7466a69a31d
-  FBSnapshotTestCase: f9f225b5ba11c8d8c09075590490df16314e4d62
+  Expecta: ee641011fe10aa1855d487b40e4976dac50ec342
+  FBSnapshotTestCase: 9d5fe43b29ae3a0ed8fc829477971b281038f748
   XNGMarkdownParser: 8ad6d21f972f2b2301637d842da2f7942faed5a0
 
 COCOAPODS: 0.36.0
