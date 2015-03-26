@@ -1,6 +1,6 @@
-source 'http://www.rubygems.org'
+source 'https://rubygems.org'
 
-gem "cocoapods", '~> 0.34.1'
-gem "slather"
+gem "cocoapods", '~> 0.36.0'
+gem "slather", '~> 1.6.0'
 gem "xcpretty"
 gem "rake"

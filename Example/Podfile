@@ -2,6 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 workspace '../XNGMarkdownParser'
 xcodeproj 'Example.xcodeproj'
+plugin 'slather'
 
 target "Example" do
   pod 'XNGMarkdownParser', :path => '..'
@@ -11,6 +12,3 @@ target "ExampleTests" do
   pod 'Expecta', '~> 0.3.1'
   pod 'FBSnapshotTestCase'
 end
-
-require 'slather'
-Slather.prepare_pods(self)
