@@ -34,6 +34,8 @@
 		C0CF278019CB2300005EF111 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0CF276819CB2300005EF111 /* UIKit.framework */; };
 		C0CF278819CB2300005EF111 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C0CF278619CB2300005EF111 /* InfoPlist.strings */; };
 		C0CF278A19CB2300005EF111 /* SnapshotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CF278919CB2300005EF111 /* SnapshotTests.m */; };
+		C0E302D01AE7A37600F66915 /* single_header.txt in Resources */ = {isa = PBXBuildFile; fileRef = C0E302CF1AE7A37600F66915 /* single_header.txt */; };
+		C0E302D11AE7A37B00F66915 /* single_header.txt in Resources */ = {isa = PBXBuildFile; fileRef = C0E302CF1AE7A37600F66915 /* single_header.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +78,7 @@
 		C0CF278519CB2300005EF111 /* ExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ExampleTests-Info.plist"; sourceTree = "<group>"; };
 		C0CF278719CB2300005EF111 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C0CF278919CB2300005EF111 /* SnapshotTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnapshotTests.m; sourceTree = "<group>"; };
+		C0E302CF1AE7A37600F66915 /* single_header.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = single_header.txt; sourceTree = "<group>"; };
 		F373E2C1346E4E0B8B708C6D /* libPods-Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -190,6 +193,7 @@
 				C09F674B19DBE3F5009CE501 /* plaintext_utf8.txt */,
 				C09F674F19DBE6F9009CE501 /* paragraph_1.txt */,
 				C09F675319DBE882009CE501 /* all_together_short.txt */,
+				C0E302CF1AE7A37600F66915 /* single_header.txt */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -287,6 +291,7 @@
 			files = (
 				C09F674719DAE98E009CE501 /* links.txt in Resources */,
 				C09F675719DBF78D009CE501 /* plaintext_utf8.txt in Resources */,
+				C0E302D11AE7A37B00F66915 /* single_header.txt in Resources */,
 				C0CF276F19CB2300005EF111 /* InfoPlist.strings in Resources */,
 				C0CF277719CB2300005EF111 /* Images.xcassets in Resources */,
 				C09F674819DAE98E009CE501 /* text_styles.txt in Resources */,
@@ -301,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C09F675519DBE882009CE501 /* all_together_short.txt in Resources */,
+				C0E302D01AE7A37600F66915 /* single_header.txt in Resources */,
 				C0CF278819CB2300005EF111 /* InfoPlist.strings in Resources */,
 				C09F674D19DBE3F5009CE501 /* plaintext_utf8.txt in Resources */,
 				C09F674519DAE77D009CE501 /* text_styles.txt in Resources */,
