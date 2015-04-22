@@ -21,6 +21,10 @@
     FBSnapshotVerifyView([self labelForMarkdownStringWithDefaultAttributesFromFile:@"headers.txt"], nil);
 }
 
+- (void)testSingleHeader {
+    FBSnapshotVerifyView([self labelForMarkdownStringWithDefaultAttributesFromFile:@"single_header.txt"], nil);
+}
+
 - (void)testLinks {
     FBSnapshotVerifyView([self labelForMarkdownStringWithDefaultAttributesFromFile:@"links.txt"], nil);
 }
