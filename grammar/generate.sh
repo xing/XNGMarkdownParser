@@ -18,7 +18,9 @@
 # limitations under the License.
 #
 
-flex --prefix=xng_markdown --nounput markdown.grammar
+# -CFa is faster but uses more memory: http://flex.sourceforge.net/manual/Options-for-Scanner-Speed-and-Size.html#Options-for-Scanner-Speed-and-Size
+# -f requires -8
+flex -Cfa -8 --prefix=xng_markdown --nounput markdown.grammar
 
 cat MarkdownTokenizerPrefix > XNGMarkdownTokenizer.cpp
 cat lex.xng_markdown.c >> XNGMarkdownTokenizer.cpp

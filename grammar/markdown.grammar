@@ -31,7 +31,7 @@ strongem1      \*\*\*[^\*]*\*\*\*
 em2            _[^_]*_
 strong2        __[^_]*__
 strongem2      ___[^_]*___
-header1        ^#{1,6}[^#{nl}]*$
+header1        ^#{1,6}[^#\n$]*[$\n]
 header2        .+\n[=-]+\n
 bulletstart    ^[-]+[ ]
 codeline       [ ]
