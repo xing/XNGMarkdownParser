@@ -175,7 +175,7 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
     style.headIndent = headIndent;
     style.lineSpacing = lineSpacing;
     style.alignment = alignment;
-    style.tabStops = @[[[NSTextTab alloc] initWithTextAlignment:alignment location:firstTabStop options:nil]];
+    style.tabStops = @[[[NSTextTab alloc] initWithTextAlignment:alignment location:firstTabStop options:@{}]];
 
     return @{NSParagraphStyleAttributeName: style};
 #else
