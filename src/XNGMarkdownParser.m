@@ -249,6 +249,24 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
 
     XNGMarkdownParserCode codeToken = token;
     switch (codeToken) {
+        case MARKDOWN_BULLETSTART: {
+            NSInteger numberOfDashes = [textAsString rangeOfString:@" "].location;
+            if (_bulletStarts.count > 0 && _bulletStarts.count <= numberOfDashes) {
+                // Treat nested bullet points as flat ones...
+                
+                // Finish off the previous dash and start a new one.
+                NSInteger lastBulletStart = [[_bulletStarts lastObject] intValue];
+                [_bulletStarts removeLastObject];
+                
+                [_accum addAttributes:[self paragraphStyle]
+                                range:NSMakeRange(lastBulletStart, _accum.length - lastBulletStart)];
+            }
+            
+            [_bulletStarts addObject:@(_accum.length)];
+            textAsString = @"•\t";
+            break;
+        }
+
         case MARKDOWN_EM: { // * *
             textAsString = [textAsString substringWithRange:NSMakeRange(1, textAsString.length - 2)];
             [attributes addEntriesFromDictionary:[self attributesForFontWithName:self.italicFontName]];
@@ -317,23 +335,6 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
                 [_accum addAttributes:[self paragraphStyle]
                                 range:NSMakeRange(lastBulletStart, _accum.length - lastBulletStart)];
             }
-            break;
-        }
-        case MARKDOWN_BULLETSTART: {
-            NSInteger numberOfDashes = [textAsString rangeOfString:@" "].location;
-            if (_bulletStarts.count > 0 && _bulletStarts.count <= numberOfDashes) {
-                // Treat nested bullet points as flat ones...
-
-                // Finish off the previous dash and start a new one.
-                NSInteger lastBulletStart = [[_bulletStarts lastObject] intValue];
-                [_bulletStarts removeLastObject];
-
-                [_accum addAttributes:[self paragraphStyle]
-                                range:NSMakeRange(lastBulletStart, _accum.length - lastBulletStart)];
-            }
-
-            [_bulletStarts addObject:@(_accum.length)];
-            textAsString = @"•\t";
             break;
         }
         case MARKDOWN_NEWLINE: {

@@ -33,7 +33,7 @@ strong2        __[^_]*__
 strongem2      ___[^_]*___
 header1        ^#{1,6}[^#\n$]*[$\n]
 header2        .+\n[=-]+\n
-bulletstart    ^[-]+[ ]
+bulletstart    ^[\*+-]+[ ]
 codeline       [ ]
 
 protocol       (http|ftp)s?\:\/\/
