@@ -13,6 +13,10 @@
     self.recordMode = NO;
 }
 
+- (void)testLists {
+    FBSnapshotVerifyView([self labelForMarkdownStringWithDefaultAttributesFromFile:@"lists.txt"], nil);
+}
+
 - (void)testPlainText {
     FBSnapshotVerifyView([self labelForMarkdownStringWithDefaultAttributesFromFile:@"plaintext_utf8.txt"], nil);
 }
@@ -49,21 +53,7 @@
 }
 
 - (void)testParagraphAttributes {
-    UILabel *label = [self defaultTextLabel];
-    NSString *markdown = [self markdownFromFile:@"paragraph_1.txt"];
-
-    XNGMarkdownParser *parser = [[XNGMarkdownParser alloc] init];
-    NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowOffset = CGSizeMake(0.5, 0.5);
-    shadow.shadowBlurRadius = 0.5;
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = 6;
-    parser.topAttributes = @{NSForegroundColorAttributeName: [UIColor darkGrayColor],
-                             NSShadowAttributeName: shadow,
-                             NSParagraphStyleAttributeName: paragraphStyle};
-    label.attributedText = [parser attributedStringFromMarkdownString:markdown];
-
-    FBSnapshotVerifyView(label, nil);
+    FBSnapshotVerifyView([self labelForMarkdownStringWithDefaultAttributesFromFile:@"lists.txt"], nil);
 }
 
 #pragma mark - Helper methods

@@ -25,7 +25,7 @@ nonascii       [\200-\377]
 unicode        \\{h}{1,6}[ \t\r\n\f]?
 escape         {unicode}|\\[ -~\200-\377]
 nmchar         [a-z0-9-]|{nonascii}|{escape}
-em1            \*[^ \*]*\*
+em1            \*[^ ][^\*}]*\*
 strong1        \*\*[^\*]*\*\*
 strongem1      \*\*\*[^\*]*\*\*\*
 em2            _[^_]*_

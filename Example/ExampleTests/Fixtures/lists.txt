@@ -1,0 +1,26 @@
+List
+----
+
+- A list with [a link](www.chiquitoipsum.com)
+- Another element **with** *stuff*
+- `with_code_inside()`
+- #We can't have a header, the header (#) symbol can be only at the beginning of the line
+- www.xing.com is also detected
+
+List with Stars
+----
+
+* A list with [a link](www.chiquitoipsum.com)
+* Another element **with** *stuff*
+* `with_code_inside()`
+* #We can't have a header, the header (#) symbol can be only at the beginning of the line
+* www.xing.com is also detected
+
+List with Plus
+----
+
++ A list with [a link](www.chiquitoipsum.com)
++ Another element **with** *stuff*
++ `with_code_inside()`
++ #We can't have a header, the header (#) symbol can be only at the beginning of the line
++ www.xing.com is also detected
