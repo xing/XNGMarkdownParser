@@ -53,7 +53,21 @@
 }
 
 - (void)testParagraphAttributes {
-    FBSnapshotVerifyView([self labelForMarkdownStringWithDefaultAttributesFromFile:@"lists.txt"], nil);
+    UILabel *label = [self defaultTextLabel];
+    NSString *markdown = [self markdownFromFile:@"paragraph_1.txt"];
+
+    XNGMarkdownParser *parser = [[XNGMarkdownParser alloc] init];
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowOffset = CGSizeMake(0.5, 0.5);
+    shadow.shadowBlurRadius = 0.5;
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 6;
+    parser.topAttributes = @{NSForegroundColorAttributeName: [UIColor darkGrayColor],
+                             NSShadowAttributeName: shadow,
+                             NSParagraphStyleAttributeName: paragraphStyle};
+    label.attributedText = [parser attributedStringFromMarkdownString:markdown];
+
+    FBSnapshotVerifyView(label, nil);
 }
 
 #pragma mark - Helper methods
