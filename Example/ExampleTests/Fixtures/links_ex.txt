@@ -1,0 +1,13 @@
+Domain in email
+===============
+
+https://www.xing.com/root/path
+xing.com/root/path
+@xing.com/root/path
+email@thisshouldnotparse.com
+link inside parenthesis -> [Text] (http://google.com "alt text") urls
+
+Acronym vs. Link
+==================
+
+Acronym like U.S.A. should not be parsed as link.

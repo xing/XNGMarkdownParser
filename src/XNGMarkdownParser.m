@@ -342,6 +342,11 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
             break;
         }
         case MARKDOWN_URL: {
+            
+            if ([textAsString hasPrefix:@"@"]) {
+                break;
+            }
+            
             XNGMarkdownLink *link = [[XNGMarkdownLink alloc] init];
             link.url = textAsString;
             link.range = NSMakeRange(_accum.length, textAsString.length);

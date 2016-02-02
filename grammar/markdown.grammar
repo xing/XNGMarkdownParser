@@ -37,10 +37,10 @@ bulletstart    ^[\*+-]+[ ]
 codeline       [ ]
 
 protocol       (http|ftp)s?\:\/\/
-subdomain      {nmchar}+\.
+subdomain      [\@]?{nmchar}{2,}\.
 urlpath        [\/]|{nmchar}+
 protourl       {protocol}[^ \n]+
-optprotourl    {protocol}?{subdomain}*{nmchar}+\.{nmchar}+{urlpath}*?
+optprotourl    {subdomain}+{urlpath}*?
 href           \[(\\\[|[^\[])+\]\(([^\)]+)\)
 
 em             {em1}|{em2}

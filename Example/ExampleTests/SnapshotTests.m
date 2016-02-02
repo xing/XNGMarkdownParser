@@ -33,6 +33,10 @@
     FBSnapshotVerifyView([self labelForMarkdownStringWithDefaultAttributesFromFile:@"links.txt"], nil);
 }
 
+- (void)testLinksEx {
+    FBSnapshotVerifyView([self labelForMarkdownStringWithDefaultAttributesFromFile:@"links_ex.txt"], nil);
+}
+
 - (void)testTextStyles {
     FBSnapshotVerifyView([self labelForMarkdownStringWithDefaultAttributesFromFile:@"text_styles.txt"], nil);
 }
