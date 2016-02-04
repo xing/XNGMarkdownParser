@@ -13,6 +13,10 @@
     self.recordMode = NO;
 }
 
+- (void)testLists {
+    FBSnapshotVerifyView([self labelForMarkdownStringWithDefaultAttributesFromFile:@"lists.txt"], nil);
+}
+
 - (void)testPlainText {
     FBSnapshotVerifyView([self labelForMarkdownStringWithDefaultAttributesFromFile:@"plaintext_utf8.txt"], nil);
 }
@@ -27,6 +31,10 @@
 
 - (void)testLinks {
     FBSnapshotVerifyView([self labelForMarkdownStringWithDefaultAttributesFromFile:@"links.txt"], nil);
+}
+
+- (void)testLinksEx {
+    FBSnapshotVerifyView([self labelForMarkdownStringWithDefaultAttributesFromFile:@"links_ex.txt"], nil);
 }
 
 - (void)testTextStyles {
