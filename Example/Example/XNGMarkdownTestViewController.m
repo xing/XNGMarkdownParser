@@ -1,12 +1,14 @@
 #import "XNGMarkdownTestViewController.h"
 #import <XNGMarkdownParser/XNGMarkdownParser.h>
 
+@import SafariServices;
+
 typedef NS_ENUM(NSUInteger, XNGMarkdownTestViewControllerMode) {
     XNGMarkdownTestViewControllerModeDisplay,
     XNGMarkdownTestViewControllerModeEditing
 };
 
-@interface XNGMarkdownTestViewController ()
+@interface XNGMarkdownTestViewController () <UITextViewDelegate>
 
 @property (nonatomic) XNGMarkdownTestViewControllerMode mode;
 @property (nonatomic) NSString *markdown;
@@ -83,6 +85,7 @@ typedef NS_ENUM(NSUInteger, XNGMarkdownTestViewControllerMode) {
     self.textView = [[UITextView alloc] initWithFrame:self.view.bounds];
     self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.textView.selectable = YES;
+    self.textView.delegate = self;
     [self.view addSubview:self.textView];
 }
 
@@ -106,6 +109,26 @@ typedef NS_ENUM(NSUInteger, XNGMarkdownTestViewControllerMode) {
 - (void)setDisplayMode:(id)sender {
     self.markdown = self.textView.text;
     self.mode = XNGMarkdownTestViewControllerModeDisplay;
+}
+
+#pragma mark - UITextViewDelegate
+
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
+    if (![URL.absoluteString hasPrefix:@"http://"]) {
+        NSString *URLString = [@"http://" stringByAppendingString:URL.absoluteString];
+        URL = [NSURL URLWithString:URLString];
+    }
+    @try {
+        SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:URL];
+        [self presentViewController:safariViewController animated:YES completion:nil];
+    } @catch (NSException *exception) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Unsupported URL"
+                                                                       message:URL.absoluteString
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    return YES;
 }
 
 #pragma mark - Helper methods
