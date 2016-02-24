@@ -6,7 +6,7 @@ end
 
 desc "Runs the specs"
 task :spec do
-  sh 'xcodebuild -workspace XNGMarkdownParser.xcworkspace -scheme \'ExampleTests\' -destination platform=\'iOS Simulator\',OS=8.1,name=\'iPhone 5s\' test -sdk iphonesimulator8.1 | xcpretty -tc && exit ${PIPESTATUS[0]}'
+  sh 'xcodebuild -workspace XNGMarkdownParser.xcworkspace -scheme \'ExampleTests\' -destination platform=\'iOS Simulator\',OS=9.2,name=\'iPhone 5s\' test -sdk iphonesimulator9.2 | xcpretty -tc && exit ${PIPESTATUS[0]}'
 end
 
 task :version do
@@ -27,7 +27,7 @@ task :version do
           remote_spec_version.to_s()
     version = suggested_version_number
   end
-  
+
   puts "Enter the version you want to release (" + version + ") "
   new_version_number = $stdin.gets.strip
   if new_version_number == ""
@@ -59,7 +59,7 @@ task :release do
 
   puts "* Running specs"
   sh "rake spec"
- 
+
   puts "* Linting the podspec"
   sh "pod lib lint"
 
