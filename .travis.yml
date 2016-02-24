@@ -2,3 +2,4 @@ language: objective-c
 before_install: rake bootstrap
 script: rake spec
 after_success: bundle exec slather
+osx_image: xcode7.2
