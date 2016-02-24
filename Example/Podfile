@@ -4,6 +4,8 @@ workspace '../XNGMarkdownParser'
 xcodeproj 'Example.xcodeproj'
 plugin 'slather'
 
+use_frameworks!
+
 target "Example" do
   pod 'XNGMarkdownParser', :path => '..'
 end
