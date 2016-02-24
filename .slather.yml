@@ -1,4 +1,4 @@
-coverage_service: coveralls
+#coverage_service: coveralls
 xcodeproj: Example/Example.xcodeproj
 source_directory: src
 build_directory: build
