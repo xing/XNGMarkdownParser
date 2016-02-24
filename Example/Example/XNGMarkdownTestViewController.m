@@ -1,9 +1,20 @@
 #import "XNGMarkdownTestViewController.h"
 #import <XNGMarkdownParser/XNGMarkdownParser.h>
 
+typedef NS_ENUM(NSUInteger, XNGMarkdownTestViewControllerMode) {
+    XNGMarkdownTestViewControllerModeDisplay,
+    XNGMarkdownTestViewControllerModeEditing
+};
+
 @interface XNGMarkdownTestViewController ()
 
-@property (strong, nonatomic) UITextView *textView;
+@property (nonatomic) XNGMarkdownTestViewControllerMode mode;
+@property (nonatomic) NSString *markdown;
+@property (nonatomic) XNGMarkdownParser *markdownParser;
+@property (nonatomic) UIBarButtonItem *reloadDefaultButton;
+@property (nonatomic) UIBarButtonItem *editButton;
+@property (nonatomic) UIBarButtonItem *doneButton;
+@property (nonatomic) UITextView *textView;
 
 @end
 
@@ -11,56 +22,98 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"XNGMarkdownParser";
+    [self setupNavigationButtons];
     [self setupTextView];
-    [self setupMarkDownAttributedString];
+    [self setupMarkdownParser];
+
+    self.mode = XNGMarkdownTestViewControllerModeDisplay;
+    [self reloadDefaultMarkdown:nil];
+}
+
+- (void)setMode:(XNGMarkdownTestViewControllerMode)mode {
+    switch (mode) {
+        case XNGMarkdownTestViewControllerModeDisplay: {
+            NSAttributedString *attr = [self.markdownParser attributedStringFromMarkdownString:self.markdown];
+            if (attr) {
+                self.textView.editable = NO;
+                _mode = mode;
+                self.textView.attributedText = attr;
+
+                self.navigationItem.leftBarButtonItem = self.reloadDefaultButton;
+                self.navigationItem.rightBarButtonItem = self.editButton;
+            } else {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                               message:@"Please fix your markdown"
+                                                                        preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+            break;
+        }
+        case XNGMarkdownTestViewControllerModeEditing: {
+            _mode = mode;
+
+            self.textView.editable = YES;
+            self.textView.text = self.markdown;
+            self.navigationItem.leftBarButtonItem = nil;
+            self.navigationItem.rightBarButtonItem = self.doneButton;
+            break;
+        }
+    }
+}
+
+#pragma mark - setup methods
+
+- (void)setupNavigationButtons {
+    self.reloadDefaultButton = [[UIBarButtonItem alloc] initWithTitle:@"Reload"
+                                                                style:UIBarButtonItemStylePlain
+                                                               target:self
+                                                               action:@selector(reloadDefaultMarkdown:)];
+    self.editButton = [[UIBarButtonItem alloc] initWithTitle:@"edit" style:UIBarButtonItemStylePlain
+                                                      target:self
+                                                      action:@selector(setEditingMode:)];
+    self.doneButton = [[UIBarButtonItem alloc] initWithTitle:@"done"
+                                                       style:UIBarButtonItemStylePlain
+                                                      target:self
+                                                      action:@selector(setDisplayMode:)];
 }
 
 - (void)setupTextView {
-    self.textView = [[UITextView alloc] initWithFrame:CGRectZero];
-    self.textView.editable = NO;
+    self.textView = [[UITextView alloc] initWithFrame:self.view.bounds];
+    self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.textView.selectable = YES;
     [self.view addSubview:self.textView];
 }
 
-- (void)setupMarkDownAttributedString {
-    NSString *markdown = [self markdownFromBundle:@"all_together_short.txt"];
-    
-    NSUInteger times = 1;
-    NSMutableString *accum = [[NSMutableString alloc] initWithCapacity:times * markdown.length];
-    for (NSUInteger i = 0; i < times; ++i) {
-        [accum appendString:markdown];
-    }
+- (void)setupMarkdownParser {
+    self.markdownParser = [[XNGMarkdownParser alloc] init];
 
-    NSLog(@"BEGIN, parsing string (length %zd)...", accum.length);
-    NSDate *begin = [NSDate date];
-
-    XNGMarkdownParser *parser = [[XNGMarkdownParser alloc] init];
-
-    NSMutableParagraphStyle *para = [[NSMutableParagraphStyle alloc] init];
-    para.minimumLineHeight = 50;
-
-    NSAttributedString *attr = [parser attributedStringFromMarkdownString:accum];
-
-    NSDate *end = [NSDate date];
-    NSTimeInterval timeDif = end.timeIntervalSince1970 - begin.timeIntervalSince1970;
-    NSLog(@"time to format: %.0f ms", timeDif * 1000);
-
-    self.textView.attributedText = attr;
+    // customise parser here
 }
+
+#pragma mark - Callbacks
+
+- (void)reloadDefaultMarkdown:(id)sender {
+    self.markdown = [self markdownFromBundle:@"all_together_short.txt"];
+    self.mode = XNGMarkdownTestViewControllerModeDisplay;
+}
+
+- (void)setEditingMode:(id)sender {
+    self.mode = XNGMarkdownTestViewControllerModeEditing;
+}
+
+- (void)setDisplayMode:(id)sender {
+    self.markdown = self.textView.text;
+    self.mode = XNGMarkdownTestViewControllerModeDisplay;
+}
+
+#pragma mark - Helper methods
 
 - (NSString *)markdownFromBundle:(NSString*)filename {
     NSBundle * bundle = [NSBundle bundleForClass:self.class];
     NSString * path = [bundle pathForResource:filename ofType:nil];
     return [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-}
-
-
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
-    CGRect frame = self.view.frame;
-    frame.origin.y = 20;
-    frame.size.height -= 20;
-    self.textView.frame = frame;
 }
 
 @end

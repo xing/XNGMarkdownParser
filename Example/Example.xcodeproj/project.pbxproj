@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		797C052440024593832F22FC /* libPods-ExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B5B1C6CE7E341319940DCBF /* libPods-ExampleTests.a */; };
 		86EF2C1A81AE4924BE53CEFB /* libPods-Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F373E2C1346E4E0B8B708C6D /* libPods-Example.a */; };
+		C07F40221C7DB91C00883712 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C07F40211C7DB91C00883712 /* LaunchScreen.storyboard */; };
 		C08F344D19CB24A700520D5A /* XNGMarkdownTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C08F344C19CB24A700520D5A /* XNGMarkdownTestViewController.m */; };
 		C09F673E19DADE7E009CE501 /* headers.txt in Resources */ = {isa = PBXBuildFile; fileRef = C09F673C19DADE7E009CE501 /* headers.txt */; };
 		C09F674419DAE77D009CE501 /* links.txt in Resources */ = {isa = PBXBuildFile; fileRef = C09F674219DAE77D009CE501 /* links.txt */; };
@@ -57,6 +58,7 @@
 		83E044CABAB8FA3CF35857C4 /* Pods-ExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ExampleTests/Pods-ExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		8B5B1C6CE7E341319940DCBF /* libPods-ExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF0D5BA7A119A97177CA3803 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		C07F40211C7DB91C00883712 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C08F344B19CB24A700520D5A /* XNGMarkdownTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XNGMarkdownTestViewController.h; sourceTree = "<group>"; };
 		C08F344C19CB24A700520D5A /* XNGMarkdownTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XNGMarkdownTestViewController.m; sourceTree = "<group>"; };
 		C09F673C19DADE7E009CE501 /* headers.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = headers.txt; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				C08F344C19CB24A700520D5A /* XNGMarkdownTestViewController.m */,
 				C0CF277619CB2300005EF111 /* Images.xcassets */,
 				C0CF276B19CB2300005EF111 /* Supporting Files */,
+				C07F40211C7DB91C00883712 /* LaunchScreen.storyboard */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				C09F674819DAE98E009CE501 /* text_styles.txt in Resources */,
 				C09F675919DBF78D009CE501 /* all_together_short.txt in Resources */,
 				C09F674619DAE98E009CE501 /* headers.txt in Resources */,
+				C07F40221C7DB91C00883712 /* LaunchScreen.storyboard in Resources */,
 				C09F675819DBF78D009CE501 /* paragraph_1.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
