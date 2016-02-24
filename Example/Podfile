@@ -11,6 +11,6 @@ target "Example" do
 end
 
 target "ExampleTests" do
-  pod 'Expecta', '~> 0.3.1'
-  pod 'FBSnapshotTestCase'
+  pod 'Expecta', '~> 1.0'
+  pod 'FBSnapshotTestCase', '= 1.7'
 end
