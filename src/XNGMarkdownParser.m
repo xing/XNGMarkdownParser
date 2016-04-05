@@ -198,9 +198,9 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
     };
 
     CTParagraphStyleRef style;
-    style = CTParagraphStyleCreate(altSettings, sizeof(altSettings) / sizeof(CTParagraphStyleSetting) );
+    style = CTParagraphStyleCreate(altSettings, sizeof(altSettings) / sizeof(CTParagraphStyleSetting));
 
-    if ( style == NULL ) {
+    if (style == NULL) {
         NSLog(@"*** Unable To Create CTParagraphStyle in apply paragraph formatting");
         return nil;
     }
@@ -229,9 +229,9 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
     XNGMarkdownParser *recursiveParser = [self copy];
     recursiveParser->_topFont = font;
 
-    NSAttributedString *recursedString =[recursiveParser attributedStringFromMarkdownString:string];
+    NSAttributedString *recursedString = [recursiveParser attributedStringFromMarkdownString:string];
     NSMutableAttributedString *mutableRecursiveString = [[NSMutableAttributedString alloc] initWithAttributedString:recursedString];
-    [mutableRecursiveString addAttributes:@{NSFontAttributeName : font}
+    [mutableRecursiveString addAttributes:@{NSFontAttributeName: font}
                                     range:NSMakeRange(0, recursedString.length)];
     [_accum appendAttributedString:mutableRecursiveString];
 }
@@ -253,15 +253,15 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
             NSInteger numberOfDashes = [textAsString rangeOfString:@" "].location;
             if (_bulletStarts.count > 0 && _bulletStarts.count <= numberOfDashes) {
                 // Treat nested bullet points as flat ones...
-                
+
                 // Finish off the previous dash and start a new one.
                 NSInteger lastBulletStart = [[_bulletStarts lastObject] intValue];
                 [_bulletStarts removeLastObject];
-                
+
                 [_accum addAttributes:[self paragraphStyle]
                                 range:NSMakeRange(lastBulletStart, _accum.length - lastBulletStart)];
             }
-            
+
             [_bulletStarts addObject:@(_accum.length)];
             textAsString = @"•\t";
             break;
@@ -342,11 +342,6 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
             break;
         }
         case MARKDOWN_URL: {
-            
-            if ([textAsString hasPrefix:@"@"]) {
-                break;
-            }
-            
             XNGMarkdownLink *link = [[XNGMarkdownLink alloc] init];
             link.url = textAsString;
             link.range = NSMakeRange(_accum.length, textAsString.length);

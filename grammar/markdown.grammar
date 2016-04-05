@@ -50,6 +50,7 @@ strikethrough  ~~.*?~~
 codespan       `.*?`
 
 url            {protourl}|{optprotourl}
+email          {word}(.{word})*@{word}\.{word}
 
 w              [ \t\r\n\f]*
 nl             \n|\r\n|\r|\f
@@ -65,6 +66,7 @@ nl             \n|\r\n|\r|\f
 {header2}                       {xng_markdown_consume(yytext, MARKDOWN_MULTILINEHEADER, yyscanner);}
 {url}                           {xng_markdown_consume(yytext, MARKDOWN_URL, yyscanner);}
 {href}                          {xng_markdown_consume(yytext, MARKDOWN_HREF, yyscanner);}
+{email}                         {xng_markdown_consume(yytext, MARKDOWN_URL, yyscanner);}
 {bulletstart}                   {xng_markdown_consume(yytext, MARKDOWN_BULLETSTART, yyscanner);}
 
 {phrase}                        {xng_markdown_consume(yytext, MARKDOWN_PHRASE, yyscanner);}
