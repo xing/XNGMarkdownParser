@@ -37,7 +37,7 @@ bulletstart    ^[\*+-]+[ ]
 codeline       [ ]
 
 protocol       (http|ftp)s?\:\/\/
-subdomain      [\@]?{nmchar}{2,}\.
+subdomain      {nmchar}{2,}\.
 urlpath        [\/]|{nmchar}+
 protourl       {protocol}[^ \n]+
 optprotourl    {subdomain}+{urlpath}*?
