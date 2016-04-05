@@ -1,5 +1,9 @@
 # XNGMarkdownParser CHANGELOG
 
+## Next version
+
+* Added new rule for proper email detection [Lars Gerckens](https://github.com/lrrrs/) [#22](https://github.com/xing/XNGMarkdownParser/pull/22)
+
 ## 0.3.2
 
 * Fix header detection   
