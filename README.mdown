@@ -31,20 +31,20 @@ Add `pod 'XNGMarkdownParser'` to your Podfile and do a `pod install`.
     **bold**
     ***bold italic***
     ~~strikethrough~~
-    
+
     # Header 1
     ## Header 2
     ### Header 3
     #### Header 4
     ##### Header 5
     ###### Header 6
-    
+
     Header 1
     ========
 
     Header 2
     --------
-    
+
     http://google.com urls
     [Text] (http://google.com "alt text") urls
 
@@ -75,11 +75,11 @@ NSAttributedString *string = [parser attributedStringFromMarkdownString:@"This i
     static XNGMarkdownParser *parser;
     dispatch_once(&onceToken, ^{
         parser = [[XNGMarkdownParser alloc] init];
- 
+
         parser.paragraphFont = [UIFont xng_14Font];
         parser.boldFontName = [UIFont xng_14Font].fontName;
         parser.linkFontName = [UIFont xng_14Font].fontName;
- 
+
         const CGFloat lineHeight = 18;
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle.minimumLineHeight = lineHeight;
@@ -88,10 +88,19 @@ NSAttributedString *string = [parser attributedStringFromMarkdownString:@"This i
             NSForegroundColorAttributeName: self.textColor
         };
     });
- 
+
     return parser;
 }
 ```
 
 See the included Example project and the tests to check for further options.
 
+### Want to collaborate?
+
+If you would like to collaborate with the project by adding features or fixing bugs, you can do it like this:
+
+- If you need to change the grammar we use to parse Markdown test, you have to change the [Lex file](http://dinosaur.compilertools.net/) `grammar/markdown.grammar`, used to generate the lexical analizer. If you need to add new tokens, you will need to add them to the files `XNGMarkdownTokens.h` and `XNGMarkdownTokens.cpp`, in order to be able to execute actions later when they are detected.
+- If you change the grammar, you need to run the script `generate.sh` to generate the code for the lexical analyzer.
+- In order to convert the detected text to an `NSAttributedString`, you will need to perform changes in the file `src/XNGMarkdownParser.m`, more concisely in the method `-consumeToken:text:`.
+
+After you have fixed a bug or added a feature, please check the tests and extend them if needed, and you will be ready to create a pull request. Thanks!

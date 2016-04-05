@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/xing/XNGMarkdownParser/"
   s.license      = 'Apache License, Version 2.0'
   s.author       = { "XING AG" => "iosdev@xing.com" }
-  s.platform     = :ios, '7.0'
+  s.platform     = :ios, '8.0'
   s.source       = { :git => "https://github.com/xing/XNGMarkdownParser.git", :tag => s.version.to_s }
   s.source_files = 'src/*.{h,m,c}'
   s.requires_arc = true
