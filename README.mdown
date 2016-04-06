@@ -47,6 +47,7 @@ Add `pod 'XNGMarkdownParser'` to your Podfile and do a `pod install`.
 
     http://google.com urls
     [Text] (http://google.com "alt text") urls
+    email@somedomain.com
 
 ## Extended Features
 
