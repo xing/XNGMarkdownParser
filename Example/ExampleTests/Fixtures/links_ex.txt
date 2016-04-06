@@ -4,7 +4,7 @@ Domain in email
 https://www.xing.com/root/path
 xing.com/root/path
 @xing.com/root/path
-email@thisshouldnotparse.com
+email@thisshouldparse.com
 link inside parenthesis -> [Text] (http://google.com "alt text") urls
 
 Acronym vs. Link
