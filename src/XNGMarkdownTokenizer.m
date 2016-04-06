@@ -23508,7 +23508,7 @@ YY_RULE_SETUP
 case 10:
 YY_RULE_SETUP
 #line 69 "markdown.grammar"
-{xng_markdown_consume(yytext, MARKDOWN_URL, yyscanner);}
+{xng_markdown_consume(yytext, MARKDOWN_EMAIL, yyscanner);}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP

@@ -342,6 +342,13 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
             textAsString = @"";
             break;
         }
+        case MARKDOWN_EMAIL: {
+            XNGMarkdownLink *link = [[XNGMarkdownLink alloc] init];
+            link.url = [@"mailto:" stringByAppendingString:textAsString];
+            link.range = NSMakeRange(_accum.length, textAsString.length);
+            [_links addObject:link];
+            break;
+        }
         case MARKDOWN_URL: {
             XNGMarkdownLink *link = [[XNGMarkdownLink alloc] init];
             link.url = textAsString;

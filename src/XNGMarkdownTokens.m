@@ -23,6 +23,7 @@ const char* xng_markdownnames[] = {
   "HEADER",
   "MULTILINEHEADER",
   "URL",
+  "EMAIL",
   "HREF",
   "PARAGRAPH",
   "NEWLINE",
