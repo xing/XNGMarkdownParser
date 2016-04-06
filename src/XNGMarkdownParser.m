@@ -23,6 +23,7 @@
 #import <CoreText/CoreText.h>
 #import <pthread.h>
 
+FILE *markdownin;
 int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scanner);
 
 @interface XNGMarkdownLink ()
@@ -101,7 +102,7 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
     _accum = [[NSMutableAttributedString alloc] init];
 
     const char *cstr = [string UTF8String];
-    FILE *markdownin = fmemopen((void *)cstr, [string lengthOfBytesUsingEncoding:NSUTF8StringEncoding], "r");
+    markdownin = fmemopen((void *)cstr, [string lengthOfBytesUsingEncoding:NSUTF8StringEncoding], "r");
 
     yyscan_t scanner;
 

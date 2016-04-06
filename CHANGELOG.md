@@ -27,3 +27,4 @@
 * Added travis & coveralls scripts
 * Cocoapod support
 * New paragraph attributes: top attributes & link font
+

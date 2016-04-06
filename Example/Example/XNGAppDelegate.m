@@ -12,7 +12,8 @@
     }
     
     XNGMarkdownTestViewController *viewController = [[XNGMarkdownTestViewController alloc] init];
-    self.window.rootViewController = viewController;
+    UINavigationController *navViewController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    self.window.rootViewController = navViewController;
     [self.window makeKeyAndVisible];
     
     return YES;
