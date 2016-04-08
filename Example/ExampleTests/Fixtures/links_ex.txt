@@ -5,9 +5,14 @@ https://www.xing.com/root/path
 xing.com/root/path
 @xing.com/root/path
 email@thisshouldparse.com
+email.name@thisshouldparse.com
+email-name@thisshouldparse.com
+email_name@thisshouldparse.com
 link inside parenthesis -> [Text] (http://google.com "alt text") urls
 
 Acronym vs. Link
 ==================
 
 Acronym like U.S.A. should not be parsed as link.
+Hello, this.is also not parsing, but
+thisone.isparsing and a bug that should be fixed
