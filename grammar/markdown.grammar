@@ -40,7 +40,7 @@ protocol       (http|ftp)s?\:\/\/
 subdomain      {nmchar}{2,}\.
 urlpath        [\/]|{nmchar}+
 protourl       {protocol}[^ \n]+
-optprotourl    {subdomain}+{urlpath}*?
+optprotourl    {protocol}?{subdomain}*{nmchar}+\.{nmchar}+{urlpath}*?
 href           \[(\\\[|[^\[])+\]\(([^\)]+)\)
 
 em             {em1}|{em2}
