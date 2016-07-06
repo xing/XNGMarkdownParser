@@ -58,6 +58,8 @@ typedef NS_ENUM (NSUInteger, XNGMarkdownParserHeader) {
 @property (nonatomic, copy) NSString *linkFontName; // Default: paragraphFont
 @property (nonatomic, assign) BOOL shouldParseLinks; // Default: YES
 
+@property (nonatomic, strong) UIColor *headerTextColor; // TextColor for header
+
 // common attributes that affect the whole string, can be overriden by the upper attributes
 @property (nonatomic, strong) NSDictionary *topAttributes;  // default: nil (do nothing)
 
