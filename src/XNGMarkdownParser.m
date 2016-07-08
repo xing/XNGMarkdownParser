@@ -227,13 +227,22 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
 }
 
 - (void)recurseOnString:(NSString *)string withFont:(UINSFont *)font {
+    [self recurseOnString:string withFont:font withTextColor:nil];
+}
+
+- (void)recurseOnString:(NSString *)string withFont:(UINSFont *)font withTextColor:(UIColor *)textColor {
     XNGMarkdownParser *recursiveParser = [self copy];
     recursiveParser->_topFont = font;
-
-    NSAttributedString *recursedString = [recursiveParser attributedStringFromMarkdownString:string];
+    
+    NSAttributedString *recursedString =[recursiveParser attributedStringFromMarkdownString:string];
     NSMutableAttributedString *mutableRecursiveString = [[NSMutableAttributedString alloc] initWithAttributedString:recursedString];
-    [mutableRecursiveString addAttributes:@{NSFontAttributeName: font}
-                                    range:NSMakeRange(0, recursedString.length)];
+    if (textColor) {
+        [mutableRecursiveString addAttributes:@{NSFontAttributeName : font, NSForegroundColorAttributeName : textColor}
+                                        range:NSMakeRange(0, recursedString.length)];
+    } else {
+        [mutableRecursiveString addAttributes:@{NSFontAttributeName : font}
+                                        range:NSMakeRange(0, recursedString.length)];
+    }
     [_accum appendAttributedString:mutableRecursiveString];
 }
 
@@ -299,7 +308,7 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
                 textAsString = [[textAsString substringFromIndex:rangeOfNonHash.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 
                 XNGMarkdownParserHeader header = (XNGMarkdownParserHeader)(rangeOfNonHash.location - 1);
-                [self recurseOnString:textAsString withFont:[self fontForHeader:header]];
+                [self recurseOnString:textAsString withFont:[self fontForHeader:header] withTextColor:self.headerTextColor];
 
                 // We already appended the recursive parser's results in recurseOnString.
                 textAsString = nil;
@@ -316,8 +325,8 @@ int xng_markdown_consume(char *text, XNGMarkdownParserCode token, yyscan_t scann
             } else if ([[components objectAtIndex:1] rangeOfString:@"-"].length > 0) {
                 font = [self fontForHeader:XNGMarkdownParserHeader2];
             }
-
-            [self recurseOnString:textAsString withFont:font];
+            
+            [self recurseOnString:textAsString withFont:font withTextColor:self.headerTextColor];
 
             // We already appended the recursive parser's results in recurseOnString.
             textAsString = nil;
